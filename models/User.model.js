@@ -1,3 +1,5 @@
+const validator = require('validator');
+
 const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema({
@@ -6,15 +8,27 @@ const userSchema = new Schema({
     required: true,
     unique: true,
     lowercase: true,
+    trim: true,
     match: [/^[a-zA-Z0-9]+$/, 'is invalid']
   },
 
   password: {
     type: String,
     required: true,
-    minlength: 6,
-    maxlength: 20,
-    match: [/^[a-zA-Z0-9]+$/, 'is invalid']
+  },
+
+  email: {
+    type: String,
+    trim: true,
+    lowercase: true,
+    unique: true,
+    validate: [ validator.isEmail, 'Invalid email']
+  },
+
+  role: {
+    type: String,
+    enum: ['Admin', 'Mod', 'User'],
+    default: 'User'
   },
 
   useravatar: {
@@ -39,7 +53,10 @@ const userSchema = new Schema({
   friends: {
     type: Schema.Types.ObjectId,
     ref: 'User'
-  }
+  },
+},
+{
+  timestamps: true
 });
 
 const User = model("User", userSchema);
