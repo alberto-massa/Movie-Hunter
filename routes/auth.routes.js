@@ -28,6 +28,30 @@ router.post('/register', (req, res) => {
     .catch(err => console.log(err))
 })
 
+router.get('/login', (req, res) => res.render('auth/login'))
+router.post('/login', (req, res) => {
+    const { username, password } = req.body
+    if (username.length === 0 || password.length === 0) {
+        res.render('auth/login', {errorMsg: 'Fill in all fields'})
+        return
+    }
+    User
+    .findOne({ username })
+    .then(user => {
+        if (!user) {
+            res.render('auth/login', {errorMsg: 'User not found'})
+            return
+        }
+        if (bcrypt.compareSync(password, user.password) === false) {
+            res.render('auth/login', {errorMsg: 'Invalid password'})
+            return
+        }
+        req.session.currentUser = user
+        res.redirect('/')
+    })
+    .catch(err => console.log(err))
+})
+
 
 
 module.exports = router;
