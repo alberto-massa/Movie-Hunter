@@ -16,6 +16,9 @@ const commentSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
+},
+{
+    timestamps: true
 })
 
 const Comment = model("Comment", commentSchema);

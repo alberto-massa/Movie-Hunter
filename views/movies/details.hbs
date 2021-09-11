@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row justify-content-center mt-5">
+         {{#each response.data.results}}
+        <div class="col-md-4">
+            <h2>Poster</h2>
+            <img src="https://image.tmdb.org/t/p/original{{poster_path}}" alt="">
+        </div>
+       
+        <div class="col-md-6">
+            <h2>Title</h2>
+            {{original_title}}
+            <h2>Released</h2>
+            {{release_date}}
+            <h2>Plot</h2>
+            {{overview}}
+
+            <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        </div>
+        {{/each}}
+    </div>
+</div>
