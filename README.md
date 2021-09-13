@@ -1,6 +1,5 @@
-# Addicted!
 
-## Tabla de endpoints
+## Endpoints
 
 | ID  | METHOD | PATH                          | DESCRIPTION                                     |
 | --- | ------ | ----------------------------- | ----------------------------------------------- |
@@ -26,8 +25,8 @@
 | 20  | GET    | /mod/filter/:commentId        | Shows the form to accept or reject a comment    |
 | 21  | POST   | /mod/filter/:commentId        | Accepts or rejects the comment                  |
 
-## Tabla de permisos
+## Access levels
 
 | Invitados            | Usuarios                  | Mods              | Admin |
 | -------------------- | ------------------------- | ----------------- | ----- |
-| /, /login, /register | Todo menos /mods y /admin | Todo menos /admin | Todo  |
+| /, /login, /register | All except /mods and /admin | All except /admin | All  |
