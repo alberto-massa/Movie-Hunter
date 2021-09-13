@@ -22,7 +22,11 @@
     {{#each upcoming.results}}
         <div class="col-md-3 mb-5">
             <div class="card">
+                {{#if poster_path}}
                 <img class="card-img-top" src="https://image.tmdb.org/t/p/original{{poster_path}}" alt="Image of {{original_title}}">
+                {{else}}
+                <img class="card-img-top" src="https://res.cloudinary.com/nyhz/image/upload/v1631550529/tymvvaz11mv6dxviqszz.jpg" alt="Image of {{original_title}}">
+                {{/if}}
                 <div class="card-body">
                     <h4 class="card-title">{{original_title}}</h4>
                     <p class="card-text">{{release_date}}</p>

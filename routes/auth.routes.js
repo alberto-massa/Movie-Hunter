@@ -2,32 +2,35 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt')
 
-const User = require('../models/User.model')
+const User = require('../models/User.model');
+const { CDNupload } = require('../config/upload.config');
 
 
 router.get('/login', (req, res) => res.render('auth/login'));
 
 
 router.get('/register', (req, res) => res.render('auth/register'))
-router.post('/register', (req, res) => {
 
-    const { username, email, password, avatar } = req.body
+
+router.post('/register', CDNupload.single('avatar'), (req, res) => {
+
+    const { username, email, password } = req.body
 
     if (password.length === 0 || username.length === 0) {
         res.render('auth/register', { errorMsg: 'Please, fill in all fields.' })
         return
     }
-    
 
     const bcryptSalt = 10
     const salt = bcrypt.genSaltSync(bcryptSalt)
     const hashPass = bcrypt.hashSync(password, salt) 
 
     User
-    .create({ username, email, password: hashPass, avatar })
+    .create({ username, email, password: hashPass, avatar: req.file.path })
     .then(res.redirect('/'))
     .catch(err => console.log(err))
 })
+
 
 router.get('/login', (req, res) => res.render('auth/login'))
 router.post('/login', (req, res) => {
@@ -53,6 +56,8 @@ router.post('/login', (req, res) => {
     .catch(err => console.log(err))
 })
 
-
+router.get('/logout', (req, res) => {
+    req.session.destroy(() => res.redirect('/'))
+})
 
 module.exports = router;

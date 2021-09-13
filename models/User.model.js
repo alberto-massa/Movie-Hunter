@@ -36,7 +36,7 @@ const userSchema = new Schema({
 
   avatar: {
     type: String,
-    default: 'https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png',
+    default: 'https://res.cloudinary.com/nyhz/image/upload/v1631550591/bc2oidw3lp9p4ldzz3dj.png',
   },
 
   comments: [{
@@ -46,7 +46,7 @@ const userSchema = new Schema({
 
 
   favouriteMovies: {
-    type: Array,
+    type: [Number]
   },
 
   friends: {

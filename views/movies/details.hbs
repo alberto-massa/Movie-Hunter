@@ -12,9 +12,11 @@
             {{this.release_date}}
             <h2>Plot</h2>
             {{this.overview}}
-            <h2>IMDB Link</h2>
-            <a href="https://www.imdb.com/title/{{this.imdb_id}}/">Link to IMDB</a>
-
+            <hr>
+            <a href="https://www.imdb.com/title/{{this.imdb_id}}/" class="btn btn-primary btn-block mt-5">Link to IMDB</a>
+            <form action="/movies/favourite/{{this.id}}" method="post">
+                <button class="btn btn-danger btn-block mt-2" type="submit">Add to favourites</button>
+            </form>
             <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         </div>
     </div>

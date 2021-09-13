@@ -4,7 +4,7 @@
             <form action="/login" method="POST">
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" autocomplete="off">
+                    <input type="text" class="form-control" id="username" name="username" autocomplete="off" autofocus>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
@@ -12,6 +12,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
                 <div>Not registered yet? <a href="/register">Sign up here!</a></div>
+                <div>{{errorMsg}}</div>
         </div>
     </div>
 </div>
