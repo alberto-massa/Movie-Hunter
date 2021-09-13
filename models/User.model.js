@@ -15,6 +15,7 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true,
+    trim: true
   },
 
   email: {
@@ -22,7 +23,7 @@ const userSchema = new Schema({
     trim: true,
     lowercase: true,
     unique: true,
-    validate: [ validator.isEmail, 'Invalid email']
+    match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/, 'is invalid']
   },
 
   role: {
@@ -41,7 +42,12 @@ const userSchema = new Schema({
     ref: 'Comment'
   }],
 
-  messages: [{
+  sentMessages: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Message'
+  }],
+
+  receivedMessages: [{
     type: Schema.Types.ObjectId,
     ref: 'Message'
   }],

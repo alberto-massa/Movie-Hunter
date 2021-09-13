@@ -17,6 +17,7 @@ router.post('/register', (req, res) => {
         res.render('auth/register', { errorMsg: 'Please, fill in all fields.' })
         return
     }
+    
 
     const bcryptSalt = 10
     const salt = bcrypt.genSaltSync(bcryptSalt)

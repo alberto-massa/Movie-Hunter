@@ -14,7 +14,7 @@ const messageSchema = new Schema({
         required: true
     }, 
 
-    topic: {
+    subject: {
         type: String,
         required: true
     },
