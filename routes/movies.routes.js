@@ -25,7 +25,7 @@ router.post('/favourite/:movieId', (req, res) => {
     console.log('ID DEL USUARIO', user._id);
 
     User
-    .findByIdAndUpdate(user._id, {favouriteMovies: movieId.movieId})
+    .findByIdAndUpdate(user._id, { $push: {'favouriteMovies': movieId.movieId}})
     .then(() => res.redirect('/user/profile'))
     .catch(err => console.log('ERROR ADDING FAVOURITE MOVIE', err))
 
