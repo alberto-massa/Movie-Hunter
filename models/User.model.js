@@ -23,18 +23,20 @@ const userSchema = new Schema({
     trim: true,
     lowercase: true,
     unique: true,
+    required: true,
     match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/, 'is invalid']
   },
 
   role: {
     type: String,
+    required: true,
     enum: ['Admin', 'Mod', 'User'],
     default: 'User'
   },
 
-  useravatar: {
+  avatar: {
     type: String,
-    default: 'Image', //TODO
+    default: 'https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png',
   },
 
   comments: [{
@@ -42,15 +44,6 @@ const userSchema = new Schema({
     ref: 'Comment'
   }],
 
-  sentMessages: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Message'
-  }],
-
-  receivedMessages: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Message'
-  }],
 
   favouriteMovies: {
     type: Array,
@@ -60,6 +53,12 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
+
+  signUpDate: {
+    type: Date,
+    required: true,
+    default: Date.now()
+  }
 },
 {
   timestamps: true

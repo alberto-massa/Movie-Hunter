@@ -5,6 +5,14 @@
   font-size: 3rem;
 }
 
+.details_container img {
+  width: 100%;
+}
+
+.profile_container img {
+  width: 100%;
+}
+
 .card {
   width: 250px;
 }

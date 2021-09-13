@@ -5,6 +5,11 @@ const commentSchema = new Schema({
         type: String,
         required: true,
     },
+    
+    movieRef: {
+        type: Number,
+
+    },
 
     rating: {
         type: Number,
@@ -23,4 +28,4 @@ const commentSchema = new Schema({
 
 const Comment = model("Comment", commentSchema);
 
-module.exports = Comment;
+module.exports = Comment
