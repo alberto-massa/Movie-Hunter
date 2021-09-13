@@ -29,4 +29,4 @@
 
 | Invitados            | Usuarios                  | Mods              | Admin |
 | -------------------- | ------------------------- | ----------------- | ----- |
-| /, /login, /register | Todo menos /mods y /admin | Todo menos /admin | Todo  |
+| /, /login, /register | All except /mods and /admin | All except /admin | All  |
