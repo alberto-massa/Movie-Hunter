@@ -1,15 +1,14 @@
-body {
-  font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
+/* INDEX CSS */
+
+.index_container h2 {
+  text-align: center;
+  font-size: 3rem;
 }
 
-a {
-  color: #00b7ff;
+.card {
+  width: 250px;
 }
 
-h1 {
-  color: 15px;
-}
-
-img {
-  width: 200px;
+#result img {
+  width: 100%;
 }

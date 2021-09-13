@@ -1,3 +1,34 @@
-<h1>{{siteTitle}} 🚀</h1>
-<p>Welcome Ironhacker!</p>
-<p>hi</p>
+<div class="container index_container">
+    <h2>Top movies</h2>
+    <div class="row justify-content-center">
+    {{#each popular.results}}
+        <div class="col-md-3 mb-5">
+            <div class="card">
+                <img class="card-img-top" src="https://image.tmdb.org/t/p/original{{poster_path}}" alt="Image of {{original_title}}">
+                <div class="card-body">
+                    <h4 class="card-title">{{original_title}}</h4>
+                    <p class="card-text">{{release_date}}</p>
+                    <a href="#" class="btn btn-primary">See details</a>
+                </div>
+            </div>
+        </div>
+    {{/each}}
+    </div>
+
+    <h2>UPCOMING MOVIES</h2>
+    <div class="row justify-content-center">
+    {{#each upcoming.results}}
+        <div class="col-md-3 mb-5">
+            <div class="card">
+                <img class="card-img-top" src="https://image.tmdb.org/t/p/original{{poster_path}}" alt="Image of {{original_title}}">
+                <div class="card-body">
+                    <h4 class="card-title">{{original_title}}</h4>
+                    <p class="card-text">{{release_date}}</p>
+                    <a href="#" class="btn btn-primary">See details</a>
+                </div>
+            </div>
+        </div>
+    {{/each}}
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js" integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</div>

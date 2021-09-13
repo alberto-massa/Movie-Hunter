@@ -11,7 +11,7 @@ const printInfo = info => {
     </div>
     <div class="col-md-6 mt-5">
     <h2>Original Title</h2>
-    ${elm.original_title}
+    ${elm.title}
     <h3>Overview</h3>
     ${elm.overview}
     <h3>Release date</h3>
