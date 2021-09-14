@@ -23,7 +23,7 @@ router.post('/register', CDNupload.single('avatar'), (req, res) => {
 
     const bcryptSalt = 10
     const salt = bcrypt.genSaltSync(bcryptSalt)
-    const hashPass = bcrypt.hashSync(password, salt) 
+    const hashPass = bcrypt.hashSync(password, salt)
 
     User
     .create({ username, email, password: hashPass, avatar: req.file.path })

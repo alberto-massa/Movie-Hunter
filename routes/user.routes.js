@@ -39,25 +39,18 @@ router.get('/profile', (req, res) => {
         for (let i = 0; i < user.favouriteMovies.length; i++) {
             arr.push(axios
             .get(`https://api.themoviedb.org/3/movie/${user.favouriteMovies[i]}?api_key=7d29ed24134deee78178561cf7b0a16c&language=en-US`))
-            // .then(response => {
-            //     object.favouriteMovies.push(response.data)
-            //     return User.findOne({ 'username': user.username })
-            // })
-            // .then(theUser => {
-            //     object.user = {...theUser}
-            //     // console.log(object);
-            //     // res.render('user/my-profile', object)
-            //     return;
-            // })
-            // .catch(err => console.log(err))
         }
-        Promise.all(arr).then(response => {
-            object.favouriteMovies.push(response)
+        Promise.all(arr)
+        .then(response => {
+            for(let j = 0; j < response.length; j++) {
+                object.favouriteMovies.push(response[j].data)
+            }
             return User.findOne({ 'username': user.username })
         })
         .then(theUser => {
+            console.log(theUser);
             object.user = theUser
-            object.favouriteMovies.forEach(elm => console.log('DATS', elm))
+            req.session.currentUser = theUser //TODO -> Hacer que aparezca la pelicula sin tener que hacer F5
             res.render('user/my-profile', object)
         })
 
@@ -147,6 +140,21 @@ router.post('/sendmsg/:targetuser', (req, res) => {
         .catch(err => console.log(err))
     })
     .catch(err => console.log(err))
+})
+
+
+router.get('/addfriend/:username', (req, res) => {
+
+    const user = req.session.currentUser
+    const targetUser = req.params
+
+    User
+    .findByIdAndUpdate(user._id, {f})
+
+
+
+
+
 })
 
 

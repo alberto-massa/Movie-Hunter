@@ -1,14 +1,14 @@
 <div class="container index_container">
     <h2>Top movies</h2>
     <div class="row justify-content-center">
-    {{#each popular.results}}
+    {{#each movieData.popularData.results}}
         <div class="col-md-3 mb-5">
             <div class="card">
                 <img class="card-img-top" src="https://image.tmdb.org/t/p/original{{poster_path}}" alt="Image of {{original_title}}">
                 <div class="card-body">
                     <h4 class="card-title">{{original_title}}</h4>
                     <p class="card-text">{{release_date}}</p>
-                    <a href="#" class="btn btn-primary">See details</a>
+                    <a href="/movies/{{id}}" class="btn btn-primary">See details</a>
                 </div>
             </div>
         </div>
@@ -19,7 +19,7 @@
 
     <h2>UPCOMING MOVIES</h2>
     <div class="row justify-content-center">
-    {{#each upcoming.results}}
+    {{#each movieData.upcomingData.results}}
         <div class="col-md-3 mb-5">
             <div class="card">
                 {{#if poster_path}}
