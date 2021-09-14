@@ -22,7 +22,6 @@ router.post('/search', (req, res) => {
 })
 
 router.get('/profile', (req, res) => {
-
     let user = req.session.currentUser
 
     const object = {
@@ -76,7 +75,7 @@ router.get('/profile/:username', (req, res) => {
 })
 
 router.post('/edit', CDNupload.single('avatar'), (req, res) => {
-
+    
     let user = req.session.currentUser
 
     User

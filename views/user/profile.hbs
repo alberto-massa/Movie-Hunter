@@ -10,7 +10,9 @@
         <div class="col-md-6">
             <h2>{{this.username}}</h2>
             <p>{{this.role}}</p>
-            <p>{{this.email}}</p>
         </div>
     </div>
+    {{#if isMod}}
+    <a class="btn btn-primary" href="/user/edit-profile">Edit</a>
+    {{/if}}
 </div>
