@@ -1,6 +1,6 @@
-<div class="container profile_container">
+<div class="container-fluid profile_container">
     <div class="row justify-content-center mt-5">
-        <div class="col-md-4">
+        <div class="col-md-4 img_col">
             <img src="{{this.avatar}}" alt="Default user avatar">
             <form action="/user/sendmsg/{{this.username}}" method="get">
                 <button class="btn btn-danger btn-block mt-3" type="submit">Send Message</button>
@@ -10,6 +10,7 @@
         <div class="col-md-6">
             <h2>{{this.username}}</h2>
             <p>{{this.role}}</p>
+            <p>{{this.email}}</p>
         </div>
     </div>
     {{#if isMod}}

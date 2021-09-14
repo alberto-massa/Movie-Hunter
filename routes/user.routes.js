@@ -40,22 +40,26 @@ router.get('/profile', (req, res) => {
             .get(`https://api.themoviedb.org/3/movie/${user.favouriteMovies[i]}?api_key=7d29ed24134deee78178561cf7b0a16c&language=en-US`))
         }
         Promise.all(arr)
-        .then(response => {
-            for(let j = 0; j < response.length; j++) {
-                object.favouriteMovies.push(response[j].data)
-            }
-            return User.findOne({ 'username': user.username })
-        })
-        .then(theUser => {
-            console.log(theUser);
-            object.user = theUser
-            req.session.currentUser = theUser //TODO -> Hacer que aparezca la pelicula sin tener que hacer F5
-            res.render('user/my-profile', object)
-        })
+            .then(response => {
+                for(let j = 0; j < response.length; j++) {
+                    object.favouriteMovies.push(response[j].data)
+                }
+                return User
+                .findOne({ 'username': user.username })
+                .populate('friends')
+            })
+            .then(theUser => {
+                console.log(theUser);
+                object.user = theUser
+                req.session.currentUser = theUser //TODO -> Hacer que aparezca la pelicula sin tener que hacer logout
+                res.render('user/my-profile', object)
+            })
+            .catch(err => console.log(err))
 
     } else {
         User
         .findOne({ 'username': user.username })
+        .populate('friends')
         .then(theUser => {
             res.render('user/my-profile', {theUser})
             console.log(theUser)
@@ -144,14 +148,40 @@ router.post('/sendmsg/:targetuser', (req, res) => {
 
 router.get('/addfriend/:username', (req, res) => {
 
-    const user = req.session.currentUser
+    const username = req.session.currentUser
     const targetUser = req.params
 
-    User
-        .findByIdAndUpdate(user._id, {f})
-        .then()
-        .catch((err) => console.log(err))
+    const targetUserObject = User.findOne({ 'username': targetUser.username })
+
+    const userArr = [targetUserObject]
+
+    Promise
+        .all(userArr)
+        .then(response => {
+            return User
+                .findByIdAndUpdate(username._id, { pendingFriends: response._id})
+        })
+        .then (() => {
+            res.redirect('/user/profile')
+        })
+        .catch(err => console.log(err))
 })
 
+
+
+// TODO - Arreglar por qué salen más de lo que deberían
+router.get('/friendlist', (req, res) => {
+
+    const user = req.session.currentUser
+
+    User
+        .findById(user._id)
+        .populate('pendingFriends')
+        .then(theUser => {
+            console.log(theUser);
+            res.render('user/friend-list', {theUser})
+        })
+        .catch(err => console.log(err))
+})
 
 module.exports = router;

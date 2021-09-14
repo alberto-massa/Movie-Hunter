@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <h2>Pending invitations</h2>
+
+            <!-- TODO | SALEN MUCHOS MAS DE LO QUE DEBERIAN -->
+            
+            {{#each theUser.pendingFriends}}
+            <hr>
+            <p>{{username}} wants to be your friend</p>
+            <form action="/user/friendlist/accept" method="post">
+                <button class="btn btn-primary" type="submit">Accept</button>
+            </form>
+            <form action="/user/friendlist/reject" method="post">
+                <button class="btn btn-danger" type="submit">Reject</button>
+            </form>
+            {{/each}}
+        </div>
+        <div class="col-md-6">
+            <h2>Your friends</h2>
+
+        </div>
+    </div>
+</div>
