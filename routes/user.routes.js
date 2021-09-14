@@ -6,11 +6,12 @@ const Message = require('./../models/Message.model')
 
 const { CDNupload } = require('../config/upload.config');
 const { default: axios } = require('axios');
-const { response } = require('express');
+
+
 
 router.get('/search', (req, res) => res.render('user/search'))
 
-router.post('/search/', (req, res) => {
+router.post('/search', (req, res) => {
 
     const { username } = req.body
 
@@ -23,44 +24,53 @@ router.post('/search/', (req, res) => {
 router.get('/profile', (req, res) => {
 
     let user = req.session.currentUser
-    console.log(user);
 
     const object = {
+        user: undefined,
         favouriteMovies : []
     }
+    let arr = [];
 
     if (!user) {
         res.render('auth/login', {errorMsg: 'Please, login to check your profile'})
     } 
 
-    console.log('------------FAVVVVVVVVVV---------------', user.favouriteMovies);
     if (user.favouriteMovies.length > 0) {
         for (let i = 0; i < user.favouriteMovies.length; i++) {
-            axios
-            .get(`https://api.themoviedb.org/3/movie/${user.favouriteMovies[i]}?api_key=7d29ed24134deee78178561cf7b0a16c&language=en-US`)
-            .then(response => {
-                object.favouriteMovies.push(response.data)
-                return User.findOne({ 'username': user.username })
-            })
-            .then(theUser => {
-                object.user = theUser
-                res.render('user/my-profile', object)
-            })
-            .catch(err => console.log(err))
+            arr.push(axios
+            .get(`https://api.themoviedb.org/3/movie/${user.favouriteMovies[i]}?api_key=7d29ed24134deee78178561cf7b0a16c&language=en-US`))
+            // .then(response => {
+            //     object.favouriteMovies.push(response.data)
+            //     return User.findOne({ 'username': user.username })
+            // })
+            // .then(theUser => {
+            //     object.user = {...theUser}
+            //     // console.log(object);
+            //     // res.render('user/my-profile', object)
+            //     return;
+            // })
+            // .catch(err => console.log(err))
         }
+        Promise.all(arr).then(response => {
+            object.favouriteMovies.push(response)
+            return User.findOne({ 'username': user.username })
+        })
+        .then(theUser => {
+            object.user = theUser
+            object.favouriteMovies.forEach(elm => console.log('DATS', elm))
+            res.render('user/my-profile', object)
+        })
+
     } else {
-        console.log('ENTRANDO EN EL ELSEEEEEEEEEEEEEE');
-        console.log(user.username);
         User
         .findOne({ 'username': user.username })
         .then(theUser => {
             res.render('user/my-profile', {theUser})
             console.log(theUser)
         })
+        .catch(err => console.log(err))
     }
-
 })
-
 
 router.get('/profile/:username', (req, res) => {
 
@@ -80,7 +90,6 @@ router.post('/edit', CDNupload.single('avatar'), (req, res) => {
     .findByIdAndUpdate(user._id, { avatar: req.file.path })
     .then(() => res.redirect('/user/profile'))
     .catch(err => console.log(err))
-
 })
 
 
@@ -92,7 +101,6 @@ router.get('/messages', (req, res) => {
         receivedMessages: []
     }
 
-    // sent messages
     Message
     .find({ authorId: user._id })
     .populate('authorId')
@@ -128,8 +136,6 @@ router.post('/sendmsg/:targetuser', (req, res) => {
 
     const message = req.body
 
-    console.log(req.params);
-
     User
     .findOne({ username: targetUser })
     .then(response => {
@@ -142,5 +148,6 @@ router.post('/sendmsg/:targetuser', (req, res) => {
     })
     .catch(err => console.log(err))
 })
+
 
 module.exports = router;
