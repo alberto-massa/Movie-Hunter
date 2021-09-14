@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="row mt-5 d-flex justify-content-center">
+        <div class="col-4">
+            <p class="text-center">Are you sure you want to permanently delete</p>
+            <p class="text-center"><strong>{{user.username}}</strong>?</p>
+        </div>
+    </div>
+    <div class="row mt-5 d-flex justify-content-center">
+        <a class="btn btn-danger mr-2" href="/admin/delete/{{user._id}}">Yes</a>
+        <a class="btn btn-dark ml-2" href="/admin/users">No</a>
+    </div>
+</div>

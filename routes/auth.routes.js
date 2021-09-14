@@ -5,12 +5,9 @@ const bcrypt = require('bcrypt')
 const User = require('../models/User.model');
 const { CDNupload } = require('../config/upload.config');
 
-
 router.get('/login', (req, res) => res.render('auth/login'));
 
-
 router.get('/register', (req, res) => res.render('auth/register'))
-
 
 router.post('/register', CDNupload.single('avatar'), (req, res) => {
 
@@ -23,41 +20,50 @@ router.post('/register', CDNupload.single('avatar'), (req, res) => {
 
     const bcryptSalt = 10
     const salt = bcrypt.genSaltSync(bcryptSalt)
-    const hashPass = bcrypt.hashSync(password, salt) 
+    const hashPass = bcrypt.hashSync(password, salt)
+
+    const query = {
+        username,
+        email,
+        password: hashPass,
+    }
+
+    if(req.file) query.avatar = req.file.path
 
     User
-    .create({ username, email, password: hashPass, avatar: req.file.path })
-    .then(res.redirect('/'))
-    .catch(err => console.log(err))
+        .create(query)
+        .then(res.redirect('/'))
+        .catch(err => console.log(err))
 })
 
 
 router.get('/login', (req, res) => res.render('auth/login'))
 router.post('/login', (req, res) => {
+
     const { username, password } = req.body
+
     if (username.length === 0 || password.length === 0) {
-        res.render('auth/login', {errorMsg: 'Fill in all fields'})
-        return
-    }
+        res.render('auth/login', {errorMsg: 'Fill in all fields'});
+        return;
+    };
+
     User
-    .findOne({ username })
-    .then(user => {
-        if (!user) {
-            res.render('auth/login', {errorMsg: 'User not found'})
-            return
-        }
-        if (bcrypt.compareSync(password, user.password) === false) {
-            res.render('auth/login', {errorMsg: 'Invalid password'})
-            return
-        }
-        req.session.currentUser = user
-        res.redirect('/')
-    })
-    .catch(err => console.log(err))
+        .findOne({ username })
+        .then(user => {
+            if (!user) {
+                res.render('auth/login', {errorMsg: 'User not found'})
+                return
+            }
+            if (bcrypt.compareSync(password, user.password) === false) {
+                res.render('auth/login', {errorMsg: 'Invalid password'})
+                return
+            }
+            req.session.currentUser = user
+            res.redirect('/')
+        })
+        .catch(err => console.log(err))
 })
 
-router.get('/logout', (req, res) => {
-    req.session.destroy(() => res.redirect('/'))
-})
+router.get('/logout', (req, res) => req.session.destroy(() => res.redirect('/')))
 
 module.exports = router;
