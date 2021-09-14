@@ -1,0 +1,27 @@
+<div class="container edit-profile_container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-3 mt-5">
+            <form action="/admin/edit/{{user.username}}" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <input type="hidden" value="{{user._id}}" name="_id">
+                </div>
+                <div class="form-group">
+                    <label for="avatar"><img src="{{user.avatar}}" alt="User avatar"></label>
+                    <input type="file" id="avatar" name="avatar">
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" value="{{user.username}}" name="username">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" value="{{user.email}}" name="email">
+                </div>
+                <div class="row mt-5 d-flex justify-content-center">
+                    <a class="btn btn-dark mr-3" href="/admin/users">Go Back</a>
+                    <button type="submit" class="btn btn-primary">Submit changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

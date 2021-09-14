@@ -6,7 +6,7 @@ const { CDNupload } = require('../config/upload.config');
 
 router.get('/search', (req, res) => res.render('user/search'))
 
-router.post('/search/', (req, res) => {
+router.post('/search', (req, res) => {
 
     const { username } = req.body
 
@@ -17,9 +17,7 @@ router.post('/search/', (req, res) => {
 })
 
 router.get('/profile', (req, res) => {
-
     let user = req.session.currentUser
-    console.log(user)
 
     if (!user) {
         res.render('auth/login', {errorMsg: 'Please, login to check your profile'})
@@ -28,10 +26,8 @@ router.get('/profile', (req, res) => {
     .findOne({ 'username': user.username })
     .then(theUser => {
             res.render('user/my-profile', theUser)
-        
     })
 })
-
 
 router.get('/profile/:username', (req, res) => {
 
@@ -44,7 +40,7 @@ router.get('/profile/:username', (req, res) => {
 })
 
 router.post('/edit', CDNupload.single('avatar'), (req, res) => {
-
+    
     let user = req.session.currentUser
 
     User
@@ -53,6 +49,5 @@ router.post('/edit', CDNupload.single('avatar'), (req, res) => {
     .catch(err => console.log(err))
 
 })
-
 
 module.exports = router;
