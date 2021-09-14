@@ -49,6 +49,11 @@ const userSchema = new Schema({
     type: [Number]
   },
 
+  pendingFriends: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
+
   friends: {
     type: Schema.Types.ObjectId,
     ref: 'User'

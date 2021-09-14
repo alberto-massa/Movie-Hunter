@@ -44,7 +44,9 @@ router.get('/profile', (req, res) => {
                 for(let j = 0; j < response.length; j++) {
                     object.favouriteMovies.push(response[j].data)
                 }
-                return User.findOne({ 'username': user.username })
+                return User
+                .findOne({ 'username': user.username })
+                .populate('friends')
             })
             .then(theUser => {
                 console.log(theUser);
@@ -57,6 +59,7 @@ router.get('/profile', (req, res) => {
     } else {
         User
         .findOne({ 'username': user.username })
+        .populate('friends')
         .then(theUser => {
             res.render('user/my-profile', {theUser})
             console.log(theUser)
@@ -145,17 +148,40 @@ router.post('/sendmsg/:targetuser', (req, res) => {
 
 router.get('/addfriend/:username', (req, res) => {
 
-    const user = req.session.currentUser
+    const username = req.session.currentUser
     const targetUser = req.params
 
-    User
-    .findByIdAndUpdate(user._id, {f})
+    const targetUserObject = User.findOne({ 'username': targetUser.username })
 
+    const userArr = [targetUserObject]
 
-
-
-
+    Promise
+        .all(userArr)
+        .then(response => {
+            return User
+                .findByIdAndUpdate(username._id, { pendingFriends: response._id})
+        })
+        .then (() => {
+            res.redirect('/user/profile')
+        })
+        .catch(err => console.log(err))
 })
 
+
+
+// TODO - Arreglar por qué salen más de lo que deberían
+router.get('/friendlist', (req, res) => {
+
+    const user = req.session.currentUser
+
+    User
+        .findById(user._id)
+        .populate('pendingFriends')
+        .then(theUser => {
+            console.log(theUser);
+            res.render('user/friend-list', {theUser})
+        })
+        .catch(err => console.log(err))
+})
 
 module.exports = router;
