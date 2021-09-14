@@ -1,19 +1,26 @@
-
-const { default: axios } = require('axios');
 const express = require('express');
+const CharactersApiHandler = require('../public/js/api-handler');
 const router = express.Router();
 
+const apiHandler = new CharactersApiHandler
+
 router.get('/', (req, res) => {
+    
+    const popularMovies = apiHandler.getPopulars()
+    const upcomingMovies = apiHandler.getUpcoming()
 
-    const data = {}
-    axios
-    .get('https://api.themoviedb.org/3/movie/popular?api_key=7d29ed24134deee78178561cf7b0a16c&language=en-US&page=1')
-    .then(thePopulars => data.popular = thePopulars.data)
-    axios
-    .get('https://api.themoviedb.org/3/movie/upcoming?api_key=7d29ed24134deee78178561cf7b0a16c&language=en-US&region=US')
-    .then(theUpcoming => data.upcoming = theUpcoming.data)
-    .then(() => res.render('index', {popular: data.popular, upcoming: data.upcoming}))
+    const movies = [popularMovies, upcomingMovies]
+
+    Promise
+        .all(movies)
+        .then(response => {
+            const movieData = {
+                popularData: response[0].data,
+                upcomingData: response[1].data
+            }
+            res.render('index', {movieData})
+        })
+        .catch(err => console.log(err))
 });
-
 
 module.exports = router;

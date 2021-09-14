@@ -21,9 +21,6 @@ router.post('/favourite/:movieId', (req, res) => {
     const movieId = req.params
     const user = req.session.currentUser
 
-    console.log('ID DE LA PELICULA', movieId.movieId);
-    console.log('ID DEL USUARIO', user._id);
-
     User
     .findByIdAndUpdate(user._id, { $push: {'favouriteMovies': movieId.movieId}})
     .then(() => res.redirect('/user/profile'))
