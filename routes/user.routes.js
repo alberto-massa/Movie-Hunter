@@ -148,12 +148,9 @@ router.get('/addfriend/:username', (req, res) => {
     const targetUser = req.params
 
     User
-    .findByIdAndUpdate(user._id, {f})
-
-
-
-
-
+        .findByIdAndUpdate(user._id, {f})
+        .then()
+        .catch((err) => console.log(err))
 })
 
 
