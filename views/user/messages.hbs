@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-5">
+            <h2 class="mb-5">Received Messages</h2>
+            {{#each receivedMessages}}
+            <h4>Sent by: {{authorId.username}}</h4>
+            <h4>Subject: {{subject}}</h4>
+            <p>{{content}}</p>
+            <hr>
+            <br>
+            {{/each}}
+        </div>
+        <div class="col-md-5">
+            <h2 class="mb-5">Sent Messages</h2>
+            {{#each sentMessages}}
+            <h4>Sent to: {{receiverId.username}}</h4>
+            <h4>Subject: {{subject}}</h4>
+            <p>{{content}}</p>
+            <hr>
+            <br>
+            {{/each}}
+
+        </div>
+    </div>
+</div>
