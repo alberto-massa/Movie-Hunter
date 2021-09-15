@@ -31,8 +31,14 @@
                <li class="nav-item rounded">
                   <a class="nav-link" href="/user/search">User Search</a>
                </li>
+
             </ul>
             <ul class="navbar-nav ml-auto">
+               {{#if isMod}}
+               <li class="nav-item">
+                  <a class="nav-link" href="/mod/commentlist">Mod comments</a>
+               </li>
+               {{/if}}
                {{#unless isLogged}}
                <li class="nav-item rounded">
                   <a class="nav-link" href="/login">Login</a>
@@ -44,7 +50,7 @@
                <li class="nav-item rounded dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                      aria-haspopup="true" aria-expanded="false">
-                     Welcome, <strong>{{username}}</strong>
+                     Welcome, <strong>{{siteUsername}}</strong>
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                      <a class="dropdown-item" href="/user/profile">Profile</a>
@@ -64,7 +70,6 @@
 
       {{{body}}}
 
-      <footer class="footer fixed-bottom bg-dark text-white text-center"><small>GitHub: @alberto-massa &amp; @Nyhz</small></footer>
 
       <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>

@@ -1,5 +1,3 @@
-const validator = require('validator');
-
 const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema({
@@ -46,17 +44,20 @@ const userSchema = new Schema({
 
 
   favouriteMovies: {
-    type: [Number]
+    type: [Number],
+    unique: true
   },
 
   pendingFriends: [{
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    unique: true
   }],
 
   friends: [{
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    unique: true
   }],
 
   signUpDate: {

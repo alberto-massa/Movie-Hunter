@@ -6,7 +6,6 @@ const User = require('../models/User.model');
 const { CDNupload } = require('../config/upload.config');
 const { alreadyLoggedIn, isLoggedIn } = require('../middleware');
 
-
 router.get('/register', alreadyLoggedIn, (req, res) => res.render('auth/register'))
 
 router.post('/register', alreadyLoggedIn, CDNupload.single('avatar'), (req, res) => {
@@ -31,6 +30,9 @@ router.post('/register', alreadyLoggedIn, CDNupload.single('avatar'), (req, res)
 
     User
         .create(query)
+        .then(theUser => {
+            req.session.currentUser = theUser
+        })
         .then(res.redirect('/'))
         .catch(err => console.log(err))
 })
@@ -63,9 +65,13 @@ router.post('/login', alreadyLoggedIn, (req, res) => {
                 req.app.locals.isAdmin = true
             }
 
+            if(user.role === 'Mod') {
+                req.app.locals.isMod = true
+            }
+
             req.session.currentUser = user
             req.app.locals.isLogged = true
-            req.app.locals.username = user.username
+            req.app.locals.username = username
 
             res.redirect('/')
         })

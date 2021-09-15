@@ -22,7 +22,6 @@ router.get('/:movieId', isLoggedIn, (req, res) => {
         movieInfo : []
     }
 
-
     Comment
         .find({ 'movieRef': movieId, 'isValidated': true })
         .populate('authorId')
@@ -33,7 +32,7 @@ router.get('/:movieId', isLoggedIn, (req, res) => {
         .then(response => {
             dataObject.movieInfo.push(response.data)
             console.log(dataObject);
-            res.render('movies/details', dataObject)
+            res.render('movies/details', {dataObject, isMod: req.session.currentUser?.role === 'Mod'}) //TODO
         })
         .catch(err => console.log(err))
 })
@@ -44,12 +43,14 @@ router.post('/favourite/:movieId', isLoggedIn, (req, res) => {
     const user = req.session.currentUser
 
     User
-    .findByIdAndUpdate(user._id, { $push: {'favouriteMovies': movieId}})
-    .then(() => res.redirect('/user/profile'))
+    .findByIdAndUpdate(user._id, { $push: {'favouriteMovies': movieId}}, {new: true})
+    .then((theUser) => {
+        req.session.currentUser = theUser
+        res.redirect('/user/profile')
+    })
     .catch(err => console.log('ERROR ADDING FAVOURITE MOVIE', err))
 
 })
-
 
 router.get('/:movieId/addcomment', (req, res) => {
 
@@ -62,8 +63,6 @@ router.get('/:movieId/addcomment', (req, res) => {
         res.render('movies/addcomment', {movieData})})
     .catch(err => console.log(err))
 })
-
-
 
 router.post('/:movieId/addcomment', (req, res) => {
 

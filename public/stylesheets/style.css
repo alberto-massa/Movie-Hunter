@@ -25,6 +25,16 @@ body {
   width: 100%;
 }
 
+.user_list {
+  font-size: 25px;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.user_list img {
+  width: 20%;
+}
+
 .img_col img {
   width: 100%;
 }
