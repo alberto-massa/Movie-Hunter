@@ -1,23 +1,39 @@
 <div class="container details_container">
     <div class="row justify-content-center mt-5">
         <div class="col-md-4">
-            <img src="https://image.tmdb.org/t/p/original{{this.poster_path}}" alt="">
+            <img src="https://image.tmdb.org/t/p/original{{movieInfo.[0].poster_path}}" alt="">
         </div>
        
         <div class="col-md-6 movie_details">
-            <h2>{{this.original_title}}</h2>
+            <h2>{{movieInfo.[0].original_title}}</h2>
             <hr>
             <h3>Released</h2>
-            {{this.release_date}}
+            {{movieInfo.[0].release_date}}
             <hr>
             <h3>Plot</h2>
-            {{this.overview}}
+            {{movieInfo.[0].overview}}
             <hr>
-            <a href="https://www.imdb.com/title/{{this.imdb_id}}/" class="btn btn-primary btn-block mt-5" target="_blank">Link to IMDB</a>
-            <form action="/movies/favourite/{{this.id}}" method="post">
+            <a href="https://www.imdb.com/title/{{movieInfo.[0].imdb_id}}/" class="btn btn-primary btn-block mt-5" target="_blank">Link to IMDB</a>
+            <form action="/movies/favourite/{{movieInfo.[0].id}}" method="post">
                 <button class="btn btn-danger btn-block mt-2" type="submit">Add to favourites</button>
             </form>
-            <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+            <a class="btn btn-dark btn-block mt-2" href="/movies/{{movieInfo.[0].id}}/addcomment">Add comment</a>
+
         </div>
     </div>
 </div>
+
+<div class="container mt-5">
+    <h2>Comment section</h2>
+    <div class="row justify-content-center">
+        {{#each comments}}
+        <div class="col-md-12">
+            <p>Author: {{authorId.username}}</p>
+            <p>Rating: {{rating}}</p>
+            <p>Comment: <br>{{content}}</p>
+            <hr>
+        </div>
+        {{/each}}
+    </div>
+</div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>

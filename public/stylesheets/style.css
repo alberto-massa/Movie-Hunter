@@ -47,7 +47,23 @@
   border-radius: 50%;
 }
 
+.img_col img {
+  width: 100%;
+}
+
+.mod_container {
+  text-align: center;
+}
+
+.comment_container {
+  min-width: 50%;
+}
+
 #result img {
+  width: 100%;
+}
+
+#content {
   width: 100%;
 }
 
