@@ -4,6 +4,7 @@
         {{#each theComments}}
         <div class="col-md-2 mb-3 comment_container">
             <p>Author: {{authorId.username}}</p>
+            <p>MovieRef: {{movieRef}}</p>
             <p>Rating: {{rating}}</p>
             <p>Comment: <br>{{content}}</p>
             <a class="btn btn-primary" href="/mod/{{_id}}/accept">Accept</a>

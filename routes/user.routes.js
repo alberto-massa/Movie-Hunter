@@ -137,9 +137,7 @@ router.post('/sendmsg/:targetuser', isLoggedIn, (req, res) => {
     .then(response => {
         Message
         .create({ authorId: user._id, receiverId: response._id, subject: message.subject, content: message.content })
-        .then(() => {
-            res.redirect('/user/profile')
-        })
+        .then(() => res.redirect('/user/profile'))
         .catch(err => console.log(err))
     })
     .catch(err => console.log(err))

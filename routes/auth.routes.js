@@ -31,6 +31,9 @@ router.post('/register', alreadyLoggedIn, CDNupload.single('avatar'), (req, res)
 
     User
         .create(query)
+        .then(theUser => {
+            req.session.currentUser = theUser
+        })
         .then(res.redirect('/'))
         .catch(err => console.log(err))
 })
@@ -69,6 +72,7 @@ router.post('/login', alreadyLoggedIn, (req, res) => {
 
             req.session.currentUser = user
             req.app.locals.isLogged = true
+            req.app.locals.username = username
 
             res.redirect('/')
         })
