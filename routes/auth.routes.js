@@ -54,16 +54,29 @@ router.post('/login', alreadyLoggedIn, (req, res) => {
                 res.render('auth/login', {errorMsg: 'User not found'})
                 return
             }
+
             if (bcrypt.compareSync(password, user.password) === false) {
                 res.render('auth/login', {errorMsg: 'Invalid password'})
                 return
             }
+
+            if (user.role === 'Admin'){
+                req.app.locals.isAdmin = true
+            }
+
             req.session.currentUser = user
+
+            req.app.locals.isLogged = true
+
             res.redirect('/')
         })
         .catch(err => console.log(err))
 })
 
-router.get('/logout', isLoggedIn, (req, res) => req.session.destroy(() => res.redirect('/')))
+router.get('/logout', isLoggedIn, (req, res) => req.session.destroy(() => {
+    res.redirect('/')
+    req.app.locals.isLogged = false
+    req.app.locals.isAdmin = false
+}))
 
 module.exports = router;

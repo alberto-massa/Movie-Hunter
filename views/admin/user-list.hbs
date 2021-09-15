@@ -4,11 +4,11 @@
         <hr class="mb-5">
         {{#each user}}
         <div class="row d-flex justify-content-around align-items-center">
-            <div class="col-md-2 mb-5 rounded">
+            <div class="col-md-2 rounded">
                 <img src="{{avatar}}" alt="user avatar">
             </div>
             <div class="col-md-2">
-                <p class="ml-3 mt-3">{{username}}</p>
+                <p class="ml-3">{{username}}</p>
             </div>
             <div class="col-md-4">
                 <p class="ml-3 t-3">{{email}}</p>
@@ -23,6 +23,7 @@
                 </div>  
             </div>
         </div>
+        <hr>
         {{/each}}
     </div>
 </div>

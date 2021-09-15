@@ -1,8 +1,11 @@
-/* INDEX CSS */
+.index-container {
+  margin-top: 2vh;
+}
 
 .index_container h2 {
   text-align: center;
   font-size: 3rem;
+  margin-top: 8rem;
 }
 
 .details_container img {

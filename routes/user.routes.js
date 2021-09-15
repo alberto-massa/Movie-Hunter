@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
+const app = express()
+
 const User = require('./../models/User.model')
 const Message = require('./../models/Message.model')
 
 const { CDNupload } = require('../config/upload.config');
 const { default: axios } = require('axios');
 const { isLoggedIn } = require('../middleware');
-
-
 
 router.get('/search', isLoggedIn, (req, res) => res.render('user/search'))
 
