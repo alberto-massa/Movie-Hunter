@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row justify-content-center mt-5">
         <div class="col-md-6">
-            <form action="/user/search/{{this.username}}" method="POST">
+            <form action="/user/search/{{theUser.username}}" method="POST">
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" class="form-control" id="username" name="username">
@@ -15,9 +15,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6 user_list">
-            <a href="/user/profile/{{this.username}}">
+            <a href="/user/profile/{{theUser.username}}">
             <br>
-            <p>{{this.username}}</p>
+            <p>{{theUser.username}}</p>
             </a>
         </div>
     </div>

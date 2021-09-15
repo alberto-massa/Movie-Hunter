@@ -18,7 +18,7 @@ router.post('/search', isLoggedIn, (req, res) => {
 
     User
         .findOne({ username })
-        .then(theUser => res.render('user/search', theUser))
+        .then(theUser => res.render('user/search', {theUser}))
         .catch(err => console.log(err))
 })
 
