@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
+const CharactersApiHandler = require('../public/js/api-handler');
+const apiHandler = new CharactersApiHandler
+
 const User = require('./../models/User.model')
 const Message = require('./../models/Message.model')
 
@@ -25,11 +28,11 @@ router.post('/search', isLoggedIn, (req, res) => {
 router.get('/profile', isLoggedIn, (req, res) => {
     let user = req.session.currentUser
 
-    const object = {
+    const data = {
         user: undefined,
         favouriteMovies : []
     }
-    let arr = [];
+    let favMovies = [];
 
     if (!user) {
         res.render('auth/login', {errorMsg: 'Please, login to check your profile'})
@@ -37,13 +40,12 @@ router.get('/profile', isLoggedIn, (req, res) => {
 
     if (user.favouriteMovies.length > 0) {
         for (let i = 0; i < user.favouriteMovies.length; i++) {
-            arr.push(axios
-            .get(`https://api.themoviedb.org/3/movie/${user.favouriteMovies[i]}?api_key=7d29ed24134deee78178561cf7b0a16c&language=en-US`))
+            favMovies.push(apiHandler.getFavourites(user.favouriteMovies[i]))
         }
-        Promise.all(arr)
+        Promise.all(favMovies)
             .then(response => {
                 for(let j = 0; j < response.length; j++) {
-                    object.favouriteMovies.push(response[j].data)
+                    data.favouriteMovies.push(response[j].data)
                 }
                 return User
                 .findOne({ 'username': user.username })
@@ -51,10 +53,12 @@ router.get('/profile', isLoggedIn, (req, res) => {
             })
             .then(theUser => {
                 console.log(theUser);
-                object.user = theUser
+                data.user = theUser
                 req.session.currentUser = theUser //TODO -> Hacer que aparezca la pelicula sin tener que hacer logout
-                res.render('user/my-profile', object)
+                return data
             })
+            .then((data) => res.render('user/my-profile', data)
+            )
             .catch(err => console.log(err))
 
     } else {
@@ -113,6 +117,7 @@ router.get('/messages', isLoggedIn, (req, res) => {
         messages.receivedMessages = receivedMsgs
         res.render('user/messages', messages)
     })
+    .catch(err => console.log(err))
 })
 
 
@@ -147,30 +152,24 @@ router.post('/sendmsg/:targetuser', isLoggedIn, (req, res) => {
 })
 
 
-router.get('/addfriend/:username', isLoggedIn, (req, res) => {
+router.get('/addfriend/:targetUser', isLoggedIn, (req, res) => {
 
-    const username = req.session.currentUser
-    const targetUser = req.params
 
-    const targetUserObject = User.findOne({ 'username': targetUser.username })
+    const username  = req.session.currentUser
+    const { targetUser } = req.params
 
-    const userArr = [targetUserObject]
-
-    Promise
-        .all(userArr)
+    User
+        .findOne({ 'username': targetUser })
         .then(response => {
             return User
-                .findByIdAndUpdate(username._id, { pendingFriends: response._id})
+                .findByIdAndUpdate( response._id, { $push: { pendingFriends: username._id}})
         })
-        .then (() => {
-            res.redirect('/user/profile')
-        })
+        .then(() => res.redirect('/user/profile'))
         .catch(err => console.log(err))
+
 })
 
 
-
-// TODO - Arreglar por qué salen más de lo que deberían
 router.get('/friendlist', isLoggedIn, (req, res) => {
 
     const user = req.session.currentUser
@@ -178,11 +177,30 @@ router.get('/friendlist', isLoggedIn, (req, res) => {
     User
         .findById(user._id)
         .populate('pendingFriends')
+        .populate('friends')
         .then(theUser => {
-            console.log(theUser);
+            console.log('pendingfriends', theUser.pendingFriends);
             res.render('user/friend-list', {theUser})
         })
         .catch(err => console.log(err))
+})
+
+
+router.post('/friendlist/:targetId/accept', (req, res) => {
+
+    const { targetId } = req.params
+    const user  = req.session.currentUser
+
+    return User
+        .findByIdAndUpdate( user._id, { $push: { friends: targetId }}, { $pull: { pendingFriends: targetId }})
+        .then(() => {
+
+            return User
+                .findByIdAndUpdate( targetId, { $push: { friends: user._id }}, { $pull: { pendingFriends: user._id }})
+        })
+        .then(res.redirect('/user/friendlist'))
+        .catch(err => console.log(err))
+
 })
 
 module.exports = router;

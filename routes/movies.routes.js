@@ -40,16 +40,15 @@ router.get('/:movieId', isLoggedIn, (req, res) => {
 
 router.post('/favourite/:movieId', isLoggedIn, (req, res) => {
 
-    const movieId = req.params
+    const {movieId} = req.params
     const user = req.session.currentUser
 
     User
-    .findByIdAndUpdate(user._id, { $push: {'favouriteMovies': movieId.movieId}})
+    .findByIdAndUpdate(user._id, { $push: {'favouriteMovies': movieId}})
     .then(() => res.redirect('/user/profile'))
     .catch(err => console.log('ERROR ADDING FAVOURITE MOVIE', err))
 
 })
-
 
 
 router.get('/:movieId/addcomment', (req, res) => {
@@ -77,7 +76,18 @@ router.post('/:movieId/addcomment', (req, res) => {
         .catch(err => console.log(err))
 })
 
+router.get('/:movieId/remove', (req, res) => {
 
+    const { movieId } = req.params
+    const { _id } = req.session.currentUser
 
+    User
+        .findByIdAndUpdate(_id, { $pull: {favouriteMovies: movieId}}, {new: true})
+        .then((newUser) => {
+            req.session.currentUser = newUser
+            res.redirect('/user/profile')
+        })
+        .catch(err => console.log(err))
+})
 
 module.exports = router;

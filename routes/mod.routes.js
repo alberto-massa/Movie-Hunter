@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
+const { isLoggedIn, checkRoles } = require("../middleware")
+
 const Comment = require('./../models/Comment.model')
 
-
-router.get('/commentlist', (req, res) => {
+router.get('/commentlist', isLoggedIn, checkRoles('Admin', 'Mod'), (req, res) => {
 
     Comment
         .find({ 'isValidated': false })
@@ -15,7 +16,7 @@ router.get('/commentlist', (req, res) => {
         .catch(err => console.log(err))
 })
 
-router.get('/:commentId/accept', (req, res) => {
+router.get('/:commentId/accept', isLoggedIn, checkRoles('Admin', 'Mod'), (req, res) => {
 
     const {commentId} = req.params
     console.log(commentId);
@@ -26,7 +27,7 @@ router.get('/:commentId/accept', (req, res) => {
         .catch(err => console.log(err))
 })
 
-router.get('/:commentId/delete', (req, res) => {
+router.get('/:commentId/delete', isLoggedIn, checkRoles('Admin', 'Mod'), (req, res) => {
 
     const {commentId} = req.params
 
@@ -35,5 +36,6 @@ router.get('/:commentId/delete', (req, res) => {
         .then(() => res.redirect('/mod/commentlist'))
         .catch(err => console.log(err))
 })
+
 
 module.exports = router

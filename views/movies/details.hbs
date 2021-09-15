@@ -28,9 +28,10 @@
     <div class="row justify-content-center">
         {{#each comments}}
         <div class="col-md-12">
-            <p>Author: {{authorId.username}}</p>
+            <p>Author: <a href="/user/profile/{{authorId.username}}">{{authorId.username}}</p></a>
             <p>Rating: {{rating}}</p>
             <p>Comment: <br>{{content}}</p>
+            <a class="btn btn-danger" href="/mod/{{_id}}/delete">Delete Comment</a>
             <hr>
         </div>
         {{/each}}
