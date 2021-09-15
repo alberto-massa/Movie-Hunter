@@ -27,7 +27,6 @@ router.post('/register', alreadyLoggedIn, CDNupload.single('avatar'), (req, res)
         email,
         password: hashPass,
     }
-
     if(req.file) query.avatar = req.file.path
 
     User
@@ -65,8 +64,8 @@ router.post('/login', alreadyLoggedIn, (req, res) => {
             }
 
             req.session.currentUser = user
-
             req.app.locals.isLogged = true
+            req.app.locals.username = user.username
 
             res.redirect('/')
         })
@@ -74,9 +73,9 @@ router.post('/login', alreadyLoggedIn, (req, res) => {
 })
 
 router.get('/logout', isLoggedIn, (req, res) => req.session.destroy(() => {
-    res.redirect('/')
     req.app.locals.isLogged = false
     req.app.locals.isAdmin = false
+    res.redirect('/')
 }))
 
 module.exports = router;

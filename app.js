@@ -16,6 +16,8 @@ app.locals.isLogged = false;
 
 app.locals.isAdmin = false;
 
+app.locals.username;
+
 require('./config/session.config')(app)
 
 require('./routes')(app);
