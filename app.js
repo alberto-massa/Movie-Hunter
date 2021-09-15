@@ -16,6 +16,8 @@ app.locals.isLogged = ""
 app.locals.isAdmin = "";
 app.locals.isMod = "";
 
+app.locals.siteUsername;
+
 require('./config/session.config')(app)
 
 require('./routes')(app);
