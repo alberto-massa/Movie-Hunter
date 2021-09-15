@@ -3,23 +3,25 @@
         <div class="col-md-5">
             <h2 class="mb-5">Received Messages</h2>
             {{#each receivedMessages}}
-            <h4>Sent by: {{authorId.username}}</h4>
+            <h4>Sent by: <a href="/user/profile/{{authorId.username}}">{{authorId.username}}</a></h4>
             <h4>Subject: {{subject}}</h4>
             <p>{{content}}</p>
             <hr>
             <br>
             {{/each}}
+            <a class="btn btn-dark" href="/user/receivedmessages/delete">Delete received messages</a>
         </div>
         <div class="col-md-5">
             <h2 class="mb-5">Sent Messages</h2>
             {{#each sentMessages}}
-            <h4>Sent to: {{receiverId.username}}</h4>
+            <h4>Sent to: <a href="/user/profile/{{receiverId.username}}">{{receiverId.username}}</a></h4>
             <h4>Subject: {{subject}}</h4>
             <p>{{content}}</p>
             <hr>
             <br>
             {{/each}}
-
+            <a class="btn btn-dark" href="/user/sentmessages/delete">Delete sent messages</a>
         </div>
     </div>
 </div>
+

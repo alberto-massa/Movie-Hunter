@@ -6,12 +6,13 @@ const Message = require('./../models/Message.model')
 
 const { CDNupload } = require('../config/upload.config');
 const { default: axios } = require('axios');
+const { isLoggedIn } = require('../middleware');
 
 
 
-router.get('/search', (req, res) => res.render('user/search'))
+router.get('/search', isLoggedIn, (req, res) => res.render('user/search'))
 
-router.post('/search', (req, res) => {
+router.post('/search', isLoggedIn, (req, res) => {
 
     const { username } = req.body
 
@@ -21,7 +22,7 @@ router.post('/search', (req, res) => {
     .catch(err => console.log(err))
 })
 
-router.get('/profile', (req, res) => {
+router.get('/profile', isLoggedIn, (req, res) => {
     let user = req.session.currentUser
 
     const object = {
@@ -68,7 +69,7 @@ router.get('/profile', (req, res) => {
     }
 })
 
-router.get('/profile/:username', (req, res) => {
+router.get('/profile/:username', isLoggedIn, (req, res) => {
 
     const { username } = req.params
 
@@ -78,7 +79,7 @@ router.get('/profile/:username', (req, res) => {
     .catch(err => console.log(err))
 })
 
-router.post('/edit', CDNupload.single('avatar'), (req, res) => {
+router.post('/edit', isLoggedIn, CDNupload.single('avatar'), (req, res) => {
     
     let user = req.session.currentUser
 
@@ -89,7 +90,7 @@ router.post('/edit', CDNupload.single('avatar'), (req, res) => {
 })
 
 
-router.get('/messages', (req, res) => {
+router.get('/messages', isLoggedIn, (req, res) => {
 
     const user = req.session.currentUser
     const messages = {
@@ -115,7 +116,7 @@ router.get('/messages', (req, res) => {
 })
 
 
-router.get('/sendmsg/:targetuser', (req, res) => {
+router.get('/sendmsg/:targetuser', isLoggedIn, (req, res) => {
 
     const users = {
         targetUser : req.params.targetuser,
@@ -125,7 +126,7 @@ router.get('/sendmsg/:targetuser', (req, res) => {
 })
 
 
-router.post('/sendmsg/:targetuser', (req, res) => {
+router.post('/sendmsg/:targetuser', isLoggedIn, (req, res) => {
 
     const user = req.session.currentUser
     const targetUser = req.params.targetuser
@@ -146,7 +147,7 @@ router.post('/sendmsg/:targetuser', (req, res) => {
 })
 
 
-router.get('/addfriend/:username', (req, res) => {
+router.get('/addfriend/:username', isLoggedIn, (req, res) => {
 
     const username = req.session.currentUser
     const targetUser = req.params
@@ -170,7 +171,7 @@ router.get('/addfriend/:username', (req, res) => {
 
 
 // TODO - Arreglar por qué salen más de lo que deberían
-router.get('/friendlist', (req, res) => {
+router.get('/friendlist', isLoggedIn, (req, res) => {
 
     const user = req.session.currentUser
 

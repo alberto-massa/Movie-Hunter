@@ -4,12 +4,12 @@ const bcrypt = require('bcrypt')
 
 const User = require('../models/User.model');
 const { CDNupload } = require('../config/upload.config');
+const { alreadyLoggedIn, isLoggedIn } = require('../middleware');
 
-router.get('/login', (req, res) => res.render('auth/login'));
 
-router.get('/register', (req, res) => res.render('auth/register'))
+router.get('/register', alreadyLoggedIn, (req, res) => res.render('auth/register'))
 
-router.post('/register', CDNupload.single('avatar'), (req, res) => {
+router.post('/register', alreadyLoggedIn, CDNupload.single('avatar'), (req, res) => {
 
     const { username, email, password } = req.body
 
@@ -37,8 +37,8 @@ router.post('/register', CDNupload.single('avatar'), (req, res) => {
 })
 
 
-router.get('/login', (req, res) => res.render('auth/login'))
-router.post('/login', (req, res) => {
+router.get('/login', alreadyLoggedIn, (req, res) => res.render('auth/login'))
+router.post('/login', alreadyLoggedIn, (req, res) => {
 
     const { username, password } = req.body
 
@@ -64,6 +64,6 @@ router.post('/login', (req, res) => {
         .catch(err => console.log(err))
 })
 
-router.get('/logout', (req, res) => req.session.destroy(() => res.redirect('/')))
+router.get('/logout', isLoggedIn, (req, res) => req.session.destroy(() => res.redirect('/')))
 
 module.exports = router;

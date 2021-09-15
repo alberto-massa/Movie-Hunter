@@ -1,12 +1,10 @@
 const express = require('express');
 const router = express.Router();
-// const {checkId, isLoggedIn, checkRoles } = require("./../middleware")
 const User = require('./../models/User.model')
 const { CDNupload } = require('../config/upload.config');
-const { nextTick } = require('process');
-const { findById } = require('./../models/User.model');
+const { isLoggedIn, checkRoles } = require("../middleware")
 
-router.get('/users', (req, res) => {
+router.get('/users', isLoggedIn, checkRoles('Admin'), (req, res) => {
 
   User
     .find()
@@ -14,7 +12,7 @@ router.get('/users', (req, res) => {
     .catch(err => console.log(err))
   })
 
-router.get('/delete/:_id', (req, res) => {
+router.get('/delete/:_id', isLoggedIn, checkRoles('Admin'), (req, res) => {
 
   const {_id} = req.params
 
@@ -24,7 +22,7 @@ router.get('/delete/:_id', (req, res) => {
     .catch(err => console.log(err))
 })
 
-router.get('/delete-user/:_id', (req, res) => {
+router.get('/delete-user/:_id', isLoggedIn, checkRoles('Admin'), (req, res) => {
 
   const {_id} = req.params
 
@@ -36,7 +34,7 @@ router.get('/delete-user/:_id', (req, res) => {
     .catch(err => console.log(err))
 })
 
-router.get('/edit/:username', (req, res) => {
+router.get('/edit/:username', isLoggedIn, checkRoles('Admin'), (req, res) => {
 
   const {username} = req.params
 
@@ -49,12 +47,19 @@ router.get('/edit/:username', (req, res) => {
 })
 
 
-router.post('/edit/:user', CDNupload.single('avatar'), (req, res) => {
+router.post('/edit/:user', CDNupload.single('avatar'), isLoggedIn, checkRoles('Admin'), (req, res) => {
 
   const { _id, username, email } = req.body
 
+  const query = {
+    username,
+    email,
+  }
+
+  if (req.file) query.avatar = req.file.path
+
   User
-    .findByIdAndUpdate(_id, { username, email, avatar: req.file.path })
+    .findByIdAndUpdate(_id, query)
     .then(() => res.redirect('/admin/users'))
     .catch(err => console.log(err))
 })

@@ -1,12 +1,13 @@
 const { default: axios } = require('axios');
 const express = require('express');
+const { isLoggedIn } = require('../middleware');
 const router = express.Router();
 
 const User = require('./../models/User.model')
 
-router.get('/search', (req, res) => res.render('movies/search'))
+router.get('/search', isLoggedIn, (req, res) => res.render('movies/search'))
 
-router.get('/:movieId', (req, res) => {
+router.get('/:movieId', isLoggedIn, (req, res) => {
 
     const {movieId} = req.params
     console.log(movieId);
@@ -16,7 +17,7 @@ router.get('/:movieId', (req, res) => {
     .then(response => res.render('movies/details', response.data))
 })
 
-router.post('/favourite/:movieId', (req, res) => {
+router.post('/favourite/:movieId', isLoggedIn, (req, res) => {
 
     const movieId = req.params
     const user = req.session.currentUser

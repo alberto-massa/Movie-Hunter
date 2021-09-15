@@ -1,16 +1,19 @@
-<div class="container user-list_container d-flex justify-content-center">
-    <div class="col-5 mt-5">
+<div class="container user-list_container justify-content-center">
+    <div class="col-md-12 mt-5">
         <h1 class="text-center">Active Users</h1>
         <hr class="mb-5">
         {{#each user}}
         <div class="row d-flex justify-content-around align-items-center">
-            <div class="col-2">
-                <img class="rounded" src="{{avatar}}" alt="user avatar">
+            <div class="col-md-2 mb-5 rounded">
+                <img src="{{avatar}}" alt="user avatar">
             </div>
-            <div class="col-5">
+            <div class="col-md-2">
                 <p class="ml-3 mt-3">{{username}}</p>
             </div>
-            <div class="col-5">
+            <div class="col-md-4">
+                <p class="ml-3 t-3">{{email}}</p>
+            </div>
+            <div class="col-md-2">
                 <div class="row">
                     <form class="form-inline" action="/admin/edit/{{username}}" method="GET">
                         <button class="btn btn-primary" type="submit">Edit</button>

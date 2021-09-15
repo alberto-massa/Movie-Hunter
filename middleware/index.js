@@ -2,12 +2,14 @@ const mongoose = require("mongoose")
 
 module.exports = {
     isLoggedIn: (req, res, next) => {
-        req.session.currentUser ? next() : res.render('auth/login', { errorMsg: 'Login in order to continue' })
+        req.session.currentUser ? next() : res.render('auth/login', { errorMsg: 'Please, log in' })
     },
-    checkId: (req, res, next) => {
-        mongoose.Types.ObjectId.isValid(req.params.id) ? next() : res.redirect('/')
+
+    alreadyLoggedIn: (req, res, next) => {
+        req.session.currentUser ? res.redirect('/') : next()
     },
+    
     checkRoles: (...roles) => (req, res, next) => {
-        roles.includes(req.session.currentUser.role) ? next() : res.render('auth/login', { errorMsg: 'Not authorized' })
+        roles.includes(req.session.currentUser.role) ? next() : res.render('index', { errorMsg: 'Not authorized' })
     }
 }

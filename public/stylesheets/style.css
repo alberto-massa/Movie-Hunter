@@ -43,6 +43,10 @@
   width: 250px;
 }
 
+.rounded img {
+  border-radius: 50%;
+}
+
 #result img {
   width: 100%;
 }
