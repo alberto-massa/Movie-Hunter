@@ -12,9 +12,9 @@ require('./config')(app);
 const { capitalized } = require("./utils");
 app.locals.siteTitle = `${capitalized('ironmovies_')}`;
 
-app.locals.isLogged = false;
-
-app.locals.isAdmin = false;
+app.locals.isLogged = ""
+app.locals.isAdmin = "";
+app.locals.isMod = "";
 
 require('./config/session.config')(app)
 

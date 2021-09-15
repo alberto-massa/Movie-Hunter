@@ -26,13 +26,22 @@
                   <a class="nav-link" href="/">Home</a>
                </li>
                <li class="nav-item">
+                  <a class="nav-link" href="/user/profile">Profile</a>
+               </li>
+               <li class="nav-item">
                   <a class="nav-link" href="/movies/search">SearchMovie</a>
                </li>
                <li class="nav-item">
                   <a class="nav-link" href="/user/search">User Search</a>
                </li>
+
             </ul>
             <ul class="navbar-nav ml-auto">
+               {{#if isMod}}
+               <li class="nav-item">
+                  <a class="nav-link" href="/mod/commentlist">Mod comments</a>
+               </li>
+               {{/if}}
                {{#unless isLogged}}
                <li class="nav-item">
                   <a class="nav-link" href="/login">Login</a>
@@ -41,9 +50,7 @@
                   <a class="nav-link" href="/register">Register</a>
                </li>
                {{else}}
-               <li class="nav-item">
-                  <a class="nav-link" href="/mod/commentlist">Mod comments</a>
-               </li>
+
                <li class="nav-item">
                   <a class="nav-link" href="/logout">Logout</a>
                </li>

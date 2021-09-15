@@ -50,7 +50,6 @@ router.post('/favourite/:movieId', isLoggedIn, (req, res) => {
 
 })
 
-
 router.get('/:movieId/addcomment', (req, res) => {
 
     const {movieId} = req.params
@@ -62,8 +61,6 @@ router.get('/:movieId/addcomment', (req, res) => {
         res.render('movies/addcomment', {movieData})})
     .catch(err => console.log(err))
 })
-
-
 
 router.post('/:movieId/addcomment', (req, res) => {
 

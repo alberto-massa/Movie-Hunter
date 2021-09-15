@@ -1,3 +1,7 @@
+body {
+  margin-top: 5%;
+}
+
 .index-container {
   margin-top: 2vh;
 }
@@ -9,6 +13,16 @@
 }
 
 .details_container img {
+  width: 100%;
+}
+
+.user_list {
+  font-size: 25px;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.user_list img {
   width: 100%;
 }
 
