@@ -71,7 +71,7 @@ router.post('/login', alreadyLoggedIn, (req, res) => {
 
             req.session.currentUser = user
             req.app.locals.isLogged = true
-            req.app.locals.username = username
+            req.app.locals.siteUsername = username
 
             res.redirect('/')
         })
