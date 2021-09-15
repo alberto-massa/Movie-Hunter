@@ -49,15 +49,15 @@ const userSchema = new Schema({
     type: [Number]
   },
 
-  pendingFriends: {
+  pendingFriends: [{
     type: Schema.Types.ObjectId,
     ref: 'User'
-  },
+  }],
 
-  friends: {
+  friends: [{
     type: Schema.Types.ObjectId,
     ref: 'User'
-  },
+  }],
 
   signUpDate: {
     type: Date,
@@ -65,6 +65,7 @@ const userSchema = new Schema({
     default: Date.now()
   }
 },
+
 {
   timestamps: true
 });

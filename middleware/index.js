@@ -10,6 +10,6 @@ module.exports = {
     },
     
     checkRoles: (...roles) => (req, res, next) => {
-        roles.includes(req.session.currentUser.role) ? next() : res.render('index', { errorMsg: 'Not authorized' })
+        roles.includes(req.session.currentUser.role) ? next() : res.redirect('/')
     }
 }
