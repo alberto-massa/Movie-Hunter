@@ -31,11 +31,11 @@
         <div class="glide__track" data-glide-el="track">
             <ul class="glide__slides">     
                 {{#each movieData.popularData.results}}
-                <li class="glide__slide">
+                <li class="glide__slide movie-card">
                     <figure>
                         <a href="/movies/{{id}}"><img loading="lazy" class="card-img-top" src="https://image.tmdb.org/t/p/original{{poster_path}}" alt="Image of {{original_title}}" style="width: 100%"></a>
                         <figcaption>
-                            <p style="font-size: 16px; opacity: 0.8" class="card-text">{{release_date}}</p>
+                            <p style="font-size: 16px; opacity: 0.8" class="card-text mt-2">{{release_date}}</p>
                             <h5 style="font-size: 18px; font-weight: 400" class="card-title">{{original_title}}</h5>
                             <div class="row justify-content-center">
                                 <a href="/movies/{{id}}" class="btn btn-warning">See details</a>
@@ -56,7 +56,7 @@
         <div class="glide__track" data-glide-el="track">
             <ul class="glide__slides">
                 {{#each movieData.upcomingData.results}}
-                <li class="glide__slide">
+                <li class="glide__slide movie-card">
                     <figure>
                         {{#if poster_path}}
                         <a href="/movies/{{id}}"><img loading="lazy" style="width: 100%" class="card-img-top" src="https://image.tmdb.org/t/p/original{{poster_path}}" alt="Image of {{original_title}}"></a>
@@ -65,9 +65,11 @@
                             alt="Image of {{original_title}}"></a>
                         {{/if}}
                         <figcaption>
-                            <p class="card-text">{{release_date}}</p>
-                            <h4 class="card-title">{{original_title}}</h4>
+                            <p class="card-text mt-2">{{release_date}}</p>
+                            <h5 class="card-title">{{original_title}}</h5>
+                            <div class="row justify-content-center">
                             <a href="/movies/{{id}}" class="btn btn-warning">See details</a>
+                            </div>
                         </figcaption>
                     </figure>
                 </li>

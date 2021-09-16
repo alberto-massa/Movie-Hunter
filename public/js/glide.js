@@ -3,7 +3,7 @@ const gl1 = new Glide('#g1', {
   touchAngle: 45,
   focusAt: 1,
   startAt: 1,
-  perView: 4.5,
+  perView: 4,
   gap: 20,
   autoplay: 2000,
   peek: {
@@ -17,7 +17,7 @@ const gl2 = new Glide('#g2', {
   touchAngle: 45,
   focusAt: 1,
   startAt: 1,
-  perView: 4.5,
+  perView: 4,
   gap: 20,
   autoplay: 2000,
   peek: {
