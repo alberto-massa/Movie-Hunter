@@ -1,15 +1,14 @@
 <div class="container mod_container">
-    <h2>List of unfiltered comments</h2>
+    <h2>Pending Comments</h2>
     <div class="row justify-content-center mt-5">
         {{#each theComments}}
-        <div class="col-md-2 mb-3 comment_container">
+        <div class="col-md-2 mr-5 ml-5 comment_container">
             <p>Author: {{authorId.username}}</p>
             <p>MovieRef: {{movieRef}}</p>
             <p>Rating: {{rating}}</p>
             <p>Comment: <br>{{content}}</p>
-            <a class="btn btn-primary" href="/mod/{{_id}}/accept">Accept</a>
-            <a class="btn btn-danger" href="/mod/{{_id}}/delete">Delete</a>
-            <hr>
+            <a class="mr-2 modbutton" href="/mod/{{_id}}/accept">Accept</a>
+            <a class="ml-2 modbutton" href="/mod/{{_id}}/delete">Delete</a>
         </div>
         {{/each}}
     </div>

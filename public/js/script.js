@@ -10,7 +10,7 @@ const printInfo = info => {
     <a href="/movies/${elm.id}">
     <img src=https://image.tmdb.org/t/p/original${elm.poster_path}></a>
     </div><div class="col-md-6 mt-5"><h2>Original Title</h2>
-    ${elm.title}<h3>Overview</h3>${elm.overview}<h3>Release date</h3>${elm.release_date}</div>`)
+    ${elm.title}<h3>Overview</h3>${elm.overview}<h3>Release date</h3>${elm.release_date}</div><hr>`)
 
     document.querySelector('#result').innerHTML = text
   }

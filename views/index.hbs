@@ -10,10 +10,10 @@
                 <div class="col-md-4 movie-content-inner">
                     <img src="https://image.tmdb.org/t/p/original{{movieData.trendingData.poster_path}}" alt="random movie poster">
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-8 movieradar_container">
                     <h2>{{movieData.trendingData.original_title}}</h2>
                     <p>{{movieData.trendingData.overview}}</p>
-                    <span><a class="btn btn-danger" href="/movies/{{movieData.trendingData.id}}">See Details</a></span>
+                    <span><a href="/movies/{{movieData.trendingData.id}}">See Details</a></span>
                 </div>
             </div>
         </div>
