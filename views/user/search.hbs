@@ -16,7 +16,11 @@
     <div class="row justify-content-center">
         <div class="col-md-6 user_list">
             <br>
-            <a href="/user/profile/{{theUser.username}}"><img id="search_img" src="{{theUser.avatar}}" alt="user avatar"><br>{{theUser.username}}</a>
+            <a href="/user/profile/{{theUser.username}}">
+            {{#if theUser.avatar}}
+            <img id="search_img" src="{{theUser.avatar}}" alt="user avatar">
+            {{/if}}
+            <br>{{theUser.username}}</a>
         </div>
     </div>
 </div>

@@ -17,6 +17,7 @@ app.locals.isAdmin = "";
 app.locals.isMod = "";
 
 app.locals.siteUsername = "";
+app.locals.userAvatar = "";
 
 require('./config/session.config')(app)
 

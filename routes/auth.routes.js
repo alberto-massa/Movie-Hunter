@@ -46,7 +46,17 @@ router.post('/login', alreadyLoggedIn, (req, res) => {
     if (username.length === 0 || password.length === 0) {
         res.render('auth/login', {errorMsg: 'Fill in all fields'});
         return;
-    };
+    }
+
+    // if (password.length < 8) {
+    //     res.render('auth/login', {errorMsg: 'Password must have at least 8 characters long'})
+    //     return
+    // }
+
+    if (!password.match(/^[a-zA-Z0-9]+$/)) {
+        res.render('auth/login', {errorMsg: 'Please only use letters and numbers'})
+        return
+    }
 
     User
         .findOne({ username })
@@ -72,6 +82,7 @@ router.post('/login', alreadyLoggedIn, (req, res) => {
             req.session.currentUser = user
             req.app.locals.isLogged = true
             req.app.locals.siteUsername = username
+            req.app.locals.userAvatar = user.avatar
 
             res.redirect('/')
         })

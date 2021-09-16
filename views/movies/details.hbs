@@ -22,7 +22,7 @@
         </div>
     </div>
 </div>
-
+{{#if dataObject.comments}}
 <div class="container mt-5">
     <h2>Comment section</h2>
     <div class="row justify-content-center">
@@ -37,4 +37,5 @@
         {{/each}}
     </div>
 </div>
+{{/if}}
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

@@ -48,16 +48,14 @@ const userSchema = new Schema({
     unique: true
   },
 
-  pendingFriends: [{
+  followers: [{
     type: Schema.Types.ObjectId,
     ref: 'User',
-    unique: true
   }],
 
-  friends: [{
+  following: [{
     type: Schema.Types.ObjectId,
     ref: 'User',
-    unique: true
   }],
 
   signUpDate: {

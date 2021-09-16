@@ -17,7 +17,7 @@
                 {{#each movieData.popularData.results}}
                 <li class="glide__slide">
                     <figure>
-                        <img loading="lazy" class="card-img-top" src="https://image.tmdb.org/t/p/original{{poster_path}}" alt="Image of {{original_title}}" style="width: 100%">
+                        <a href="/movies/{{id}}"><img loading="lazy" class="card-img-top" src="https://image.tmdb.org/t/p/original{{poster_path}}" alt="Image of {{original_title}}" style="width: 100%"></a>
                         <figcaption>
                             <h5 style="font-size: 18px; font-weight: 400" class="card-title">{{original_title}}</h5>
                             <p style="font-size: 16px; opacity: 0.8" class="card-text text-center">{{release_date}}</p>
@@ -40,10 +40,10 @@
                 <li class="glide__slide">
                     <figure>
                         {{#if poster_path}}
-                        <img loading="lazy" style="width: 100%" class="card-img-top" src="https://image.tmdb.org/t/p/original{{poster_path}}" alt="Image of {{original_title}}">
+                        <a href="/movies/{{id}}"><img loading="lazy" style="width: 100%" class="card-img-top" src="https://image.tmdb.org/t/p/original{{poster_path}}" alt="Image of {{original_title}}"></a>
                         {{else}}
-                        <img loading="lazy" style="width: 100%" class="card-img-top" src="https://res.cloudinary.com/nyhz/image/upload/v1631550529/tymvvaz11mv6dxviqszz.jpg"
-                            alt="Image of {{original_title}}">
+                        <a href="/movies/{{id}}"><img loading="lazy" style="width: 100%" class="card-img-top" src="https://res.cloudinary.com/nyhz/image/upload/v1631550529/tymvvaz11mv6dxviqszz.jpg"
+                            alt="Image of {{original_title}}"></a>
                         {{/if}}
                         <figcaption>
                             <h4 class="card-title">{{original_title}}</h4>

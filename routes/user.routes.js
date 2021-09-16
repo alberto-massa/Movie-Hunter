@@ -25,10 +25,17 @@ router.post('/search', isLoggedIn, (req, res) => {
 router.get('/profile', isLoggedIn, (req, res) => {
     let user = req.session.currentUser
 
+
     const data = {
         user: undefined,
-        favouriteMovies : []
+        favouriteMovies : [],
+        followers: 0,
+        following: 0
     }
+
+    data.followers = user.followers.length
+    data.following = user.following.length
+
     let favMovies = [];
 
     if (user.favouriteMovies.length > 0) {
@@ -43,11 +50,11 @@ router.get('/profile', isLoggedIn, (req, res) => {
                 }
                 return User
                 .findOne({ 'username': user.username })
-                .populate('friends')
+                .populate('following')
             })
             .then(theUser => {
-                console.log(theUser);
                 data.user = theUser
+                console.log('data q paso------------------', data)
                 req.session.currentUser = theUser //TODO -> Hacer que aparezca la pelicula sin tener que hacer logout
                 return data
             })
@@ -58,9 +65,13 @@ router.get('/profile', isLoggedIn, (req, res) => {
     } else {
         User
         .findOne({ 'username': user.username })
-        .populate('friends')
+        .populate('following')
         .then(theUser => {
-            res.render('user/my-profile', {theUser})
+            let following = theUser.following.length
+            let followers = theUser.followers.length
+            console.log('ABAJO q paso------------------', theUser)
+
+            res.render('user/my-profile', {theUser, followers, following})
             console.log(theUser)
         })
         .catch(err => console.log(err))
@@ -69,11 +80,22 @@ router.get('/profile', isLoggedIn, (req, res) => {
 
 router.get('/profile/:username', isLoggedIn, (req, res) => {
 
+    const currentUser =  req.session.currentUser
     const { username } = req.params
+
+    if (currentUser.username === username) {
+        console.log("REDIRECCIONANDO");
+        res.redirect('/user/profile')
+        return
+    }
 
     User
         .findOne({ username })
-        .then(theUser => res.render('user/profile', theUser))
+        .then(theUser => {
+            let alreadyFollowing = false;
+            theUser.followers.includes(currentUser._id) ? alreadyFollowing = true : alreadyFollowing = false
+            res.render('user/profile', {theUser, alreadyFollowing})
+        })
         .catch(err => console.log(err))
 })
 
@@ -143,7 +165,7 @@ router.post('/sendmsg/:targetuser', isLoggedIn, (req, res) => {
     .catch(err => console.log(err))
 })
 
-router.get('/addfriend/:targetUser', isLoggedIn, (req, res) => {
+router.get('/follow/:targetUser', isLoggedIn, (req, res) => {
 
 
     const username  = req.session.currentUser
@@ -153,66 +175,72 @@ router.get('/addfriend/:targetUser', isLoggedIn, (req, res) => {
         .findOne({ 'username': targetUser })
         .then(response => {
             return User
-                .findByIdAndUpdate( response._id, { $push: { pendingFriends: username._id}})
+                .findByIdAndUpdate( response._id, { $push: { followers: username._id}}, {new: true})
         })
-        .then(() => res.redirect('/user/profile'))
-        .catch(err => console.log(err))
-
-})
-
-
-router.get('/friendlist', isLoggedIn, (req, res) => {
-
-    const user = req.session.currentUser
-
-    User
-        .findById(user._id)
-        .populate('pendingFriends')
-        .populate('friends')
-        .then(theUser => {
-            console.log('pendingfriends', theUser.pendingFriends);
-            res.render('user/friend-list', {theUser})
-        })
-            .catch(err => console.log(err))
-})
-
-
-router.post('/friendlist/:targetId/accept', (req, res) => {
-
-    const { targetId } = req.params
-    const user  = req.session.currentUser
-
-    User
-        .findByIdAndUpdate( user._id, { $push: { friends: targetId }})
-        .then(() => {
+        .then(response => {
             return User
-                .findByIdAndUpdate( user._id, { $pull: { pendingFriends: targetId }})
+                .findByIdAndUpdate( username._id, { $push: { following: response._id}}, {new: true})
+        })
+        .then((theUser) => {
+            req.session.currentUser = theUser
+            res.redirect('/user/profile')
         })
         .catch(err => console.log(err))
-
-    User
-        .findByIdAndUpdate( targetId, { $push: { friends: user._id }})
-        .then(() => {
-            return User
-                .findByIdAndUpdate( targetId, { $pull: { pendingFriends: user._id }})
-        })
-        .then(() => res.redirect('/user/friendlist'))
-        .catch(err => console.log(err))
-
 })
 
-router.post('/friendlist/:targetId/reject', (req, res) => {
 
-    const { targetId } = req.params
-    const user = req.session.currentUser
+// router.get('/friendlist', isLoggedIn, (req, res) => {
 
-    User
-        .findByIdAndUpdate( user._id, { $pull: { pendingFriends: targetId }})
-        .then(() => {
-            res.redirect('/user/friendlist')
-        })
-        .catch(err => console.log(err))
+//     const user = req.session.currentUser
 
-})
+//     User
+//         .findById(user._id)
+//         .populate('pendingFriends')
+//         .populate('friends')
+//         .then(theUser => {
+//             console.log('pendingfriends', theUser.pendingFriends);
+//             res.render('user/friend-list', {theUser})
+//         })
+//             .catch(err => console.log(err))
+// })
+
+
+// router.post('/friendlist/:targetId/accept', (req, res) => {
+
+//     const { targetId } = req.params
+//     const user  = req.session.currentUser
+
+//     User
+//         .findByIdAndUpdate( user._id, { $push: { friends: targetId }})
+//         .then(() => {
+//             return User
+//                 .findByIdAndUpdate( user._id, { $pull: { pendingFriends: targetId }})
+//         })
+//         .catch(err => console.log(err))
+
+//     User
+//         .findByIdAndUpdate( targetId, { $push: { friends: user._id }})
+//         .then(() => {
+//             return User
+//                 .findByIdAndUpdate( targetId, { $pull: { pendingFriends: user._id }})
+//         })
+//         .then(() => res.redirect('/user/friendlist'))
+//         .catch(err => console.log(err))
+
+// })
+
+// router.post('/friendlist/:targetId/reject', (req, res) => {
+
+//     const { targetId } = req.params
+//     const user = req.session.currentUser
+
+//     User
+//         .findByIdAndUpdate( user._id, { $pull: { pendingFriends: targetId }})
+//         .then(() => {
+//             res.redirect('/user/friendlist')
+//         })
+//         .catch(err => console.log(err))
+
+// })
 
 module.exports = router;
