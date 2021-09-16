@@ -1,6 +1,15 @@
+<div id="wrapper">
+    <section class="movie">
+        <div class="movie-content parallax">
+            <h1>Ironmovies_</h1>
+            <p>Scroll down to check the latest movies</p>
+        </div>
+    </section>
+</div>
+
 <div class="container index_container">
     <div id="errorMsg">{{errorMsg}}</div>
-    
+
     <div id="g1" class="glide">
         <h2 class="mb-3">Trending movies</h2>
         <div class="glide__track" data-glide-el="track">
@@ -8,11 +17,11 @@
                 {{#each movieData.popularData.results}}
                 <li class="glide__slide">
                     <figure>
-                        <img class="card-img-top" src="https://image.tmdb.org/t/p/original{{poster_path}}" alt="Image of {{original_title}}" style="width: 100%">
+                        <img loading="lazy" class="card-img-top" src="https://image.tmdb.org/t/p/original{{poster_path}}" alt="Image of {{original_title}}" style="width: 100%">
                         <figcaption>
-                            <h5 class="card-title">{{original_title}}</h5>
-                            <p class="card-text text-center">{{release_date}}</p>
-                            <a href="/movies/{{id}}" class="btn btn-outline-primary">See details</a>
+                            <h5 style="font-size: 18px; font-weight: 400" class="card-title">{{original_title}}</h5>
+                            <p style="font-size: 16px; opacity: 0.8" class="card-text text-center">{{release_date}}</p>
+                            <a href="/movies/{{id}}" class="btn btn-primary">See details</a>
                         </figcaption>
                     </figure>            
                 </li>
@@ -31,9 +40,9 @@
                 <li class="glide__slide">
                     <figure>
                         {{#if poster_path}}
-                        <img style="width: 100%" class="card-img-top" src="https://image.tmdb.org/t/p/original{{poster_path}}" alt="Image of {{original_title}}">
+                        <img loading="lazy" style="width: 100%" class="card-img-top" src="https://image.tmdb.org/t/p/original{{poster_path}}" alt="Image of {{original_title}}">
                         {{else}}
-                        <img style="width: 100%" class="card-img-top" src="https://res.cloudinary.com/nyhz/image/upload/v1631550529/tymvvaz11mv6dxviqszz.jpg"
+                        <img loading="lazy" style="width: 100%" class="card-img-top" src="https://res.cloudinary.com/nyhz/image/upload/v1631550529/tymvvaz11mv6dxviqszz.jpg"
                             alt="Image of {{original_title}}">
                         {{/if}}
                         <figcaption>
