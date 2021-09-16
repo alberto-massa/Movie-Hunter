@@ -237,8 +237,54 @@ body {
   background-image: url('/images/register_bg.png');
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
 }
 
 .register_form {
+  width: 30vw;
   background-color: #353a3f;
+  padding: 50px;
+  margin-top: 10vh;
+  border-radius: 15px;
+}
+
+.register_form input {
+  background: #353a3f;
+  border: 1px solid #ffc700;
+  box-sizing: border-box;
+  border-radius: 20px;
+}
+
+.register_form input:focus {
+  background-color: #353a3f;
+  color: white;
+}
+
+.register_form button {
+  background-color: #ffc700;
+  width: 30%;
+  padding: 8px 16px;
+  border-radius: 20px;
+}
+
+.register_form img {
+  width: 20%;
+}
+
+.register_form button:hover {
+  background-color: #ffd646;
+}
+
+.register_form a {
+  color: #ffc700;
+}
+
+label {
+  cursor: pointer;
+}
+
+.custom-file-upload {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
 }
