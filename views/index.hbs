@@ -1,12 +1,13 @@
 <div id="wrapper">
     <section class="movie">
-        <div class="movie-content parallax">
-            <h1>Ironmovies_</h1>
-            <p>Scroll down to check the latest movies</p>
+        <div class="movie-content">
+        </div>
+        <div id="movie-footer">
+                <p>Check the latest movies</p>
+                <img src="/images/scroll-down.gif" alt="scroll down">   
         </div>
     </section>
 </div>
-
 <div class="container index_container">
     <div id="errorMsg">{{errorMsg}}</div>
 
@@ -19,9 +20,9 @@
                     <figure>
                         <img loading="lazy" class="card-img-top" src="https://image.tmdb.org/t/p/original{{poster_path}}" alt="Image of {{original_title}}" style="width: 100%">
                         <figcaption>
+                            <p style="font-size: 16px; opacity: 0.8" class="card-text">{{release_date}}</p>
                             <h5 style="font-size: 18px; font-weight: 400" class="card-title">{{original_title}}</h5>
-                            <p style="font-size: 16px; opacity: 0.8" class="card-text text-center">{{release_date}}</p>
-                            <a href="/movies/{{id}}" class="btn btn-primary">See details</a>
+                            <a href="/movies/{{id}}" class="btn btn-warning">See details</a>
                         </figcaption>
                     </figure>            
                 </li>
@@ -46,9 +47,9 @@
                             alt="Image of {{original_title}}">
                         {{/if}}
                         <figcaption>
-                            <h4 class="card-title">{{original_title}}</h4>
                             <p class="card-text">{{release_date}}</p>
-                            <a href="/movies/{{id}}" class="btn btn-primary">See details</a>
+                            <h4 class="card-title">{{original_title}}</h4>
+                            <a href="/movies/{{id}}" class="btn btn-warning">See details</a>
                         </figcaption>
                     </figure>
                 </li>
