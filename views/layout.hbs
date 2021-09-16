@@ -23,13 +23,13 @@
          <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                <li class="nav-item rounded-pill">
-                  <a class="nav-link" href="/"><img class="mr-2 ml-1" src="/images/lucide_film.png" alt="home page logo"> Home page</a>
+                  <a class="nav-link" href="/"><img class="mr-2 ml-1" src="/images/nav-icons/lucide_film.png" alt="home page logo"> Home page</a>
                </li>
                <li class="nav-item rounded-pill">
-                  <a class="nav-link" href="/movies/search"><img class="mr-2 ml-1" src="/images/Vector.png" alt="home page logo"> Movies</a>
+                  <a class="nav-link" href="/movies/search"><img class="mr-2 ml-1" src="/images/nav-icons/Vector.png" alt="home page logo"> Movies</a>
                </li>
                <li class="nav-item rounded-pill">
-                  <a class="nav-link" href="/user/search"><img class="mr-2 ml-1" src="/images/ph_users-bold.png" alt="home page logo"></i> Community</a>
+                  <a class="nav-link" href="/user/search"><img class="mr-2 ml-1" src="/images/nav-icons/ph_users-bold.png" alt="home page logo"></i> Community</a>
                </li>
 
             </ul>
@@ -40,18 +40,17 @@
                </li>
                {{/if}}
                {{#unless isLogged}}
-               <li class="nav-item rounded">
+               <li class="nav-item rounded-pill">
                   <a class="nav-link" href="/login">Login</a>
                </li>
                <li class="nav-item">
-                  <a class="nav-link rounded" href="/register">Register</a>
+                  <a class="nav-link rounded-pill" href="/register">Register</a>
                </li>
                {{else}}
-               <li class="nav-item rounded dropdown">
+               <li class="nav-item rounded dropdown d-flex">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                      aria-haspopup="true" aria-expanded="false">
                      Welcome, <strong>{{siteUsername}}</strong></a>
-                  <img id="navbar_avatar" src="{{userAvatar}}" alt="user avatar">
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                      <a class="dropdown-item" href="/user/profile">Profile</a>
                      {{#if isAdmin}}
@@ -62,6 +61,7 @@
                      <div class="dropdown-divider"></div>
                      <a class="dropdown-item" href="/logout">Logout</a>
                   </div>
+                  <img id="navbar_avatar" src="{{userAvatar}}" alt="user avatar">
                </li>
                {{/unless}}
             </ul>

@@ -34,7 +34,7 @@ const userSchema = new Schema({
 
   avatar: {
     type: String,
-    default: 'https://res.cloudinary.com/nyhz/image/upload/v1631550591/bc2oidw3lp9p4ldzz3dj.png',
+    default: '/images/avatars/default.png',
   },
 
   comments: [{
