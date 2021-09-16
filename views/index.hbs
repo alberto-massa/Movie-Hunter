@@ -1,6 +1,21 @@
 <div id="wrapper">
     <section class="movie">
-        <div class="movie-content">
+        <div class="container movie-content">
+            <div class="row justify-content-center mb-4">
+                <div class="col-md-12">
+                    <h2 class="text-center" >Movie radar</h2>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-4 movie-content-inner">
+                    <img src="https://image.tmdb.org/t/p/original{{movieData.trendingData.poster_path}}" alt="random movie poster">
+                </div>
+                <div class="col-md-8">
+                    <h2>{{movieData.trendingData.original_title}}</h2>
+                    <p>{{movieData.trendingData.overview}}</p>
+                    <span><a class="btn btn-danger" href="/movies/{{movieData.trendingData.id}}">See Details</a></span>
+                </div>
+            </div>
         </div>
         <div id="movie-footer">
                 <p>Check the latest movies</p>

@@ -70,8 +70,10 @@ body {
   width: 74px;
   height: 98px;
 }
+
 .movie {
-  background: url('/images/home-bg-2.jpg') no-repeat fixed top center / cover;
+  background: url('/images/index-bg-large.jpg') no-repeat fixed top center /
+    cover;
   width: 100%;
   height: 100vh;
   position: relative;
@@ -148,6 +150,17 @@ body {
   font-size: 3rem;
 }
 
+.movie-content {
+  padding: 25px;
+  margin: auto;
+}
+
+.movie-content-inner img {
+  width: 100%;
+  margin: auto;
+  object-fit: cover;
+}
+
 .card {
   width: 250px;
 }
@@ -214,4 +227,14 @@ body {
   100% {
     bottom: -50px;
   }
+}
+
+.register_container {
+  background-image: url('/images/register_bg.png');
+  width: 100vw;
+  height: 100vh;
+}
+
+.register_form {
+  background-color: #353a3f;
 }
