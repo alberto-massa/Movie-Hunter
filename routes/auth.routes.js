@@ -6,6 +6,9 @@ const User = require('../models/User.model');
 const { CDNupload } = require('../config/upload.config');
 const { alreadyLoggedIn, isLoggedIn } = require('../middleware');
 
+const transporter = require('./../config/mailing.config')
+
+
 router.get('/register', alreadyLoggedIn, (req, res) => res.render('auth/register'))
 
 router.post('/register', alreadyLoggedIn, CDNupload.single('avatar'), (req, res) => {
@@ -26,6 +29,16 @@ router.post('/register', alreadyLoggedIn, CDNupload.single('avatar'), (req, res)
         email,
         password: hashPass,
     }
+
+    transporter
+    .sendMail({
+      from: `Bienvenido/a ${username} <hellomoviehunter@gmail.com>`,
+      to: email,
+      subject: `Welcome ${username}`,
+      text: 'Hello',
+      html: `<b>Hello ${username}!<br>Welcome to Movie Hunter! He really hope you enjoy your stay.<br>Sicerely, the Movie Hunter team.</b>`
+    })
+
     if(req.file) query.avatar = req.file.path
 
     User

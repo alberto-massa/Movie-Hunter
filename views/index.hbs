@@ -40,7 +40,9 @@
 
 
 <div class="container index_container">
+    {{#if errorMsg}}
     <div id="errorMsg">{{errorMsg}}</div>
+    {{/if}}
     <div id="g1" class="glide">
         <h2 class="mb-3">Trending movies</h2>
         <div class="glide__track" data-glide-el="track">

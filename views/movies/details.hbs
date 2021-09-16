@@ -13,9 +13,9 @@
             <h3>Plot</h2>
             {{dataObject.movieInfo.[0].overview}}
             <hr>
-            <a href="https://www.imdb.com/title/{{dataObject.movieInfo.[0].imdb_id}}/" class="btn btn-primary btn-block mt-5" target="_blank">Link to IMDB</a>
+            <a href="https://www.imdb.com/title/{{dataObject.movieInfo.[0].imdb_id}}/" class="btn btn-dark btn-block mt-5" target="_blank">Link to IMDB</a>
             <form action="/movies/favourite/{{dataObject.movieInfo.[0].id}}" method="post">
-                <button class="btn btn-danger btn-block mt-2" type="submit">Add to favourites</button>
+                <button class="btn btn-dark btn-block mt-2" type="submit">Add to favourites</button>
             </form>
             <a class="btn btn-dark btn-block mt-2" href="/movies/{{dataObject.movieInfo.[0].id}}/addcomment">Add comment</a>
 
