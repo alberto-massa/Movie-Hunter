@@ -1,17 +1,16 @@
-<div class="container">
+<div class="container-fluid moviesearch_container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-5 search_container">
             <form action="/movies/search" method="GET">
-            <div class="form-group">
-                <label for="movie">Enter movie name:</label>
-                <input type="text" class="form-control" id="movie" name="movie">
+            <div class="form-group input_container">
+                <input type="text" class="form-control" id="movie" name="movie" placeholder="Search for your favourite movie">
             </div>
             </form>
         </div>
     </div>
 </div>
 
-<div class="container">
+<div class="container results_container">
     <div class="row justify-content-center" id="result">
 
     </div>
