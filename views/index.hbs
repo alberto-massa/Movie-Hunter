@@ -1,42 +1,44 @@
-<div id="wrapper">
-    <section class="movie">
-        <div class="container-fluid movie-content">
-            <div class="row justify-content-center mb-4">
-                <div class="col-md-6">
-                    <h1 class="title-logo">Movie Hunter</h1>
-                </div>
-                <div class="col-6">
-                    <img class="logo" src="/images/logo.png" alt="logo">
-                </div>
+<section class="movie">
+    <div class="container movie-content">
+        <div class="row justify-content-center mb-4">
+            <div class="col-md-6">
+                <h1 class="title-logo">Movie Hunter</h1>
+                <hr class="bg-warning">
+                <p>Your daily dose of movies. Look for a specific movie or let yourself get inspired by our community!</p>
             </div>
+            <div class="col-6">
+                <img class="logo" src="/images/logo.png" alt="logo">
+            </div>
+        </div>
 
-            <div class="row justify-content-center">
-                <div class="col-md-4 movie-content-inner">
-                    <img src="https://image.tmdb.org/t/p/original{{movieData.trendingData.poster_path}}" alt="random movie poster">
+        <div class="row justify-content-center">
+            <div class="col-md-4 movie-content-inner">
+                <img src="https://image.tmdb.org/t/p/original{{movieData.trendingData.poster_path}}" alt="random movie poster">
+            </div>
+            <div class="col-md-8 main-movie">
+                <div class="row">
+                    <img src="/images/star.png" alt="star">
+                    <h2>Trending this week</h2>
                 </div>
-                <div class="col-md-8 main-movie">
-                    <div class="row">
-                        <img src="/images/star.png" alt="star">
-                        <h2>Trending this week</h2>
-                    </div>
-                    <div class="row">
-                        <h6>{{movieData.trendingData.original_title}}</h6>
-                    </div>
-                    <div class="row">
-                        <span><a class="btn btn-warning" href="/movies/{{movieData.trendingData.id}}">See Details</a></span>
-                    </div>
-                        
-                    
-                    
+                <div class="row">
+                    <h6>{{movieData.trendingData.original_title}}</h6>
                 </div>
+                <div class="row">
+                    <span><a class="btn btn-warning" href="/movies/{{movieData.trendingData.id}}">See Details</a></span>
+                </div>
+                    
+                
+                
             </div>
         </div>
-        <div class="movie-footer">
-                <p>Check the latest movies</p>
-                <img src="/images/scroll-down.gif" alt="scroll down">
-        </div>
-    </section>
-</div>
+    </div>
+    <div class="movie-footer">
+        <p>Check the latest movies</p>
+        <img src="/images/scroll-down.gif" alt="scroll down">
+    </div>
+</section>
+
+
 <div class="container index_container">
     <div id="errorMsg">{{errorMsg}}</div>
     <div id="g1" class="glide">

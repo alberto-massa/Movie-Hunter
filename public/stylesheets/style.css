@@ -1,20 +1,22 @@
 /* GENERAL - FOR ALL PAGES */
-:root {
-  --bg-color: #202124;
-}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 
 body {
-  background-color: var(--bg-color);
+  background-color: #202124;
   color: white;
+  font-family: 'Roboto', sans-serif;
 }
 
 .container {
   margin-top: 100px;
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 /* NAVBAR */
 .navbar {
   opacity: 0.9 !important;
+  font-family: 'Roboto', sans-serif;
 }
 
 .navbar img {
@@ -27,14 +29,11 @@ body {
 
 /* INDEX PAGE */
 .index_container h2 {
-  font-family: 'Courier';
+  font-family: 'Roboto', sans-serif;
 }
 
-#wrapper {
-  position: relative;
-  margin: 0;
-  padding: 0;
-  color: var(--main-color);
+.main-movie {
+  max-height: 20vh;
 }
 
 .main-movie p {
@@ -69,7 +68,7 @@ body {
   background: #33373c;
   opacity: 0.8;
   backdrop-filter: blur(100px);
-  font-family: Courier;
+  font-family: 'Roboto', sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -123,7 +122,7 @@ body {
 }
 
 .title-logo {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Roboto', sans-serif;
   font-weight: 600;
 }
 

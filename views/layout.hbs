@@ -35,17 +35,13 @@
 
             </ul>
             <ul class="navbar-nav ml-auto">
-               {{#if isMod}}
-               <li class="nav-item">
-                  <a class="nav-link" href="/mod/commentlist">Mod comments</a>
-               </li>
-               {{/if}}
+               
                {{#unless isLogged}}
                <li class="nav-item rounded-pill">
                   <a class="nav-link" href="/login">Login</a>
                </li>
-               <li class="nav-item">
-                  <a class="nav-link rounded-pill" href="/register">Register</a>
+               <li class="nav-item rounded-pill">
+                  <a class="nav-link " href="/register">Register</a>
                </li>
                {{else}}
                <li class="nav-item rounded dropdown d-flex">
@@ -54,6 +50,10 @@
                      Welcome, <strong>{{siteUsername}}</strong></a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                      <a class="dropdown-item" href="/user/profile">Profile</a>
+                     {{#if isMod}}
+                     <div class="dropdown-divider"></div>
+                     <a class="dropdown-item" href="/mod/commentlist">Mod comments</a>
+                     {{/if}}
                      {{#if isAdmin}}
                      <div class="dropdown-divider"></div>
                      <a class="dropdown-item" href="/mod/commentlist">Mod comments</a>
