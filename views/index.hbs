@@ -11,7 +11,7 @@
             </div>
         </div>
 
-        <div class="row justify-content-center">
+        <div class=" trending row justify-content-center">
             <div class="col-md-4 movie-content-inner">
                 <img src="https://image.tmdb.org/t/p/original{{movieData.trendingData.poster_path}}" alt="random movie poster">
             </div>
@@ -20,15 +20,10 @@
                     <img src="/images/star.png" alt="star">
                     <h2>Trending this week</h2>
                 </div>
-                <div class="row">
+                <div class="row justify-content-around mt-3">
                     <h6>{{movieData.trendingData.original_title}}</h6>
-                </div>
-                <div class="row">
-                    <span><a class="btn btn-warning" href="/movies/{{movieData.trendingData.id}}">See Details</a></span>
-                </div>
-                    
-                
-                
+                    <span><a class="btn btn-warning rounded-pill" href="/movies/{{movieData.trendingData.id}}">See Details</a></span>
+                </div>    
             </div>
         </div>
     </div>
@@ -55,7 +50,7 @@
                             <p style="font-size: 16px; opacity: 0.8" class="card-text mt-2">{{release_date}}</p>
                             <h5 style="font-size: 18px; font-weight: 400" class="card-title">{{original_title}}</h5>
                             <div class="row justify-content-center">
-                                <a href="/movies/{{id}}" class="btn btn-warning">See details</a>
+                                <a href="/movies/{{id}}" class="btn btn-warning rounded-pill">See details</a>
                             </div>
                             
                         </figcaption>
@@ -66,9 +61,9 @@
         </div>
     </div>
 
-    <hr>
+    <hr class="bg-warning mt-5 mb-5">
 
-    <div id="g2" class="glide">
+    <div id="g2" class="glide mb-5">
         <h2 class="mb-3">Upcoming movies</h2>
         <div class="glide__track" data-glide-el="track">
             <ul class="glide__slides">
@@ -85,7 +80,7 @@
                             <p class="card-text mt-2">{{release_date}}</p>
                             <h5 class="card-title">{{original_title}}</h5>
                             <div class="row justify-content-center">
-                            <a href="/movies/{{id}}" class="btn btn-warning">See details</a>
+                            <a href="/movies/{{id}}" class="btn btn-warning rounded-pill">See details</a>
                             </div>
                         </figcaption>
                     </figure>
