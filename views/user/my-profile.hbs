@@ -17,7 +17,7 @@
                         <h2>My profile</h2>
                         <h4>{{theUser.role}}</h4>
                         <div class="row">
-                            <img src="{{theUser.avatar}}" alt="user avatar">
+                            <img class="rounded-circle mr-4" src="{{theUser.avatar}}" alt="user avatar">
                             <form class="mt-3 d-flex flex-column" action="/user/edit" method="post" enctype="multipart/form-data">
                                 <label class="btn btn-outline-warning rounded-pill mt-3" for="avatar">Change avatar</label>
                                 <input class="custom-file-upload" type="file" name="avatar" id="avatar">
@@ -28,7 +28,7 @@
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-md-4 follow_count">
-                        <p class="text-center text-warning mt-3">Followers: {{followers}} | Following: {{following}}</p>
+                        <p class="text-center text-warning mt-3">Followers: {{followers}} Following: {{following}}</p>
                     </div>
                 </div>
                 <label for="username">Username</label>
@@ -60,7 +60,7 @@
                         <h2>My profile</h2>
                         <h4>{{user.role}}</h4>
                         <div class="row">
-                        <img src="{{user.avatar}}" alt="user avatar">
+                        <img class="rounded-circle mr-4" src="{{user.avatar}}" alt="user avatar">
                         <form class="mt-3 d-flex flex-column" action="/user/edit" method="post" enctype="multipart/form-data">
                             <label class="btn btn-outline-warning rounded-pill mt-3" for="avatar">Change avatar</label>
                             <input class="custom-file-upload" type="file" name="avatar" id="avatar">
