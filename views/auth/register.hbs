@@ -3,26 +3,28 @@
         <div class="col-md-5 register_form">
             <h2 class="text-center mb-3">Sign up</h2>
             <div class="row justify-content-center">
-                <img src="/images/avatars/default.png" alt="default avatar">
             </div>
             <form action="/register" method="POST" enctype="multipart/form-data">
                 <div class="form-group text-center mt-3">
-                    <label class="text-center upload_button" for="avatar">Upload your avatar</label><br>
-                    <input class="custom-file-upload" type="file" class="form-control" id="avatar" name="avatar">
+                    <div class="row d-flex align-items-center justify-content-center">
+                        <img src="/images/avatars/default.png" alt="default avatar">
+                        <label class="text-center upload_button ml-3" for="avatar">Upload your avatar</label><br>
+                        <input class="custom-file-upload" type="file" class="form-control" id="avatar" name="avatar">
+                    </div>
                 </div>
-                <div class="form-group mb-4">
+                <div class="form-group mb-3">
                     <label for="username">Username</label>
                     <input type="text" class="form-control" id="username" name="username" placeholder="Username" autocomplete="off">
                 </div>
-                <div class="form-group mb-4">
+                <div class="form-group mb-3">
                     <label for="email">Email</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="Email" autocomplete="off">
                 </div>
-                <div class="form-group mb-4">
+                <div class="form-group mb-3">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                 </div>
-                <div class="form-group mb-4">
+                <div class="form-group mb-3">
                     <label for="checkpassword">Confirm password</label>
                     <input type="password" class="form-control" id="checkpassword" name="checkpassword" placeholder="Repeat your password">
                 </div>

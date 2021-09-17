@@ -15,7 +15,9 @@
                     <button type="submit">Submit</button>
                 </div>
                 <div class="text-center mt-2">Not registered yet? <a href="/register">Sign up here!</a></div>
+                {{#if errorMsg}}
                 <div id="errorMsg">{{errorMsg}}</div>
+                {{/if}}
         </div>
     </div>
 </div>

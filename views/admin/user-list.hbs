@@ -5,7 +5,7 @@
         {{#each user}}
         <div class="row d-flex justify-content-around align-items-center">
             <div class="col-md-2 rounded">
-                <img src="{{avatar}}" alt="user avatar">
+                <a href="/user/profile/{{username}}"><img src="{{avatar}}" alt="user avatar"></a>
             </div>
             <div class="col-md-2">
                 <p class="ml-3">{{username}}</p>
@@ -16,10 +16,9 @@
             <div class="col-md-2">
                 <div class="row">
                     <form class="form-inline" action="/admin/edit/{{username}}" method="GET">
-                        <button class="btn btn-primary" type="submit">Edit</button>
+                        <button class="btn btn-warning rounded-pill pl-4 pr-4" type="submit">Edit</button>
                     </form>
-                    {{!-- <a class="btn btn-danger ml-2" href="/admin/delete/{{_id}}">Delete</a> --}}
-                    <a class="btn btn-danger ml-2" href="/admin/delete-user/{{_id}}">Delete</a>
+                    <a class="btn btn-outline-danger ml-2 rounded-pill" href="/admin/delete-user/{{_id}}">Delete</a>
                 </div>  
             </div>
         </div>
