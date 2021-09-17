@@ -56,7 +56,7 @@ body {
 .movie-content {
   position: absolute;
   width: 45%;
-  height: 50vh;
+  height: 55vh;
   left: 45%;
   top: 22vh;
   background: #202124;
@@ -304,7 +304,7 @@ body {
   width: 400px;
   position: fixed;
   bottom: 20px;
-  padding: 5px;
+  padding: 6px;
   text-align: center;
   animation: showFromBottom 6s forwards;
   border-radius: 15px;
@@ -334,7 +334,7 @@ body {
 /* REGISTER CSS */
 
 .register_container {
-  background-image: url('/images/register_bg.png');
+  background: no-repeat center/100% url('./../images/register_bg.png');
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -405,7 +405,7 @@ label {
 /* LOGIN CSS */
 
 .login_container {
-  background-image: url('/images/register_bg.png');
+  background: no-repeat center/100% url('./../images/register_bg.png');
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -740,4 +740,11 @@ textarea {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.author-comment:hover {
+  text-decoration: none;
+}
+.author-comment {
+  font-size: 1.5rem;
 }

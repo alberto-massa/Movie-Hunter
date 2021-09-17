@@ -13,22 +13,22 @@
             <h3>Plot</h2>
             {{dataObject.movieInfo.[0].overview}}
             <hr>
-            <a href="https://www.imdb.com/title/{{dataObject.movieInfo.[0].imdb_id}}/" class="btn btn-dark btn-block mt-5" target="_blank">Link to IMDB</a>
+            <a href="https://www.imdb.com/title/{{dataObject.movieInfo.[0].imdb_id}}/" class="btn btn-dark btn-block mt-5 rounded-pill" target="_blank">Link to IMDB</a>
             <form action="/movies/favourite/{{dataObject.movieInfo.[0].id}}" method="post">
-                <button class="btn btn-dark btn-block mt-2" type="submit">Add to favourites</button>
+                <button class="btn btn-dark btn-block mt-2 rounded-pill" type="submit">Add to favourites</button>
             </form>
-            <a class="btn btn-dark btn-block mt-2" href="/movies/{{dataObject.movieInfo.[0].id}}/addcomment">Add comment</a>
+            <a class="btn btn-dark btn-block mt-2 rounded-pill" href="/movies/{{dataObject.movieInfo.[0].id}}/addcomment">Add comment</a>
 
         </div>
     </div>
 </div>
 {{#if dataObject.comments}}
 <div class="container mt-5">
-    <h2>Comment section</h2>
+    <h2 class="mb-5 text-center">Comment section</h2>
     <div class="row justify-content-center">
         {{#each dataObject.comments}}
         <div class="col-md-12">
-            <p>Author: <a href="/user/profile/{{authorId.username}}">{{authorId.username}}</p></a>
+            <p class="author-comment">Author: <a class="ml-2 author-comment text-warning" href="/user/profile/{{authorId.username}}">{{authorId.username}}</p></a>
             <p>Rating: {{rating}}</p>
             <p>Comment: <br>{{content}}</p>
             <a class="btn btn-danger" href="/mod/{{_id}}/delete">Delete Comment</a>
