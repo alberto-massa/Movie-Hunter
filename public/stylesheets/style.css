@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 body {
-  background-color:#202124;
+  background-color: #202124;
   color: white;
 }
 
@@ -742,9 +742,9 @@ textarea {
   text-overflow: ellipsis;
 }
 
-.author-comment:hover{
+.author-comment:hover {
   text-decoration: none;
 }
 .author-comment {
-   font-size: 1.5rem;
+  font-size: 1.5rem;
 }
