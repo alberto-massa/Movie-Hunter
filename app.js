@@ -10,7 +10,7 @@ const app = express();
 require('./config')(app);
 
 const { capitalized } = require("./utils");
-app.locals.siteTitle = `${capitalized('ironmovies_')}`;
+app.locals.siteTitle = `${capitalized('movie hunter')}`;
 
 app.locals.isLogged = ""
 app.locals.isAdmin = "";

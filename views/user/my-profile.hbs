@@ -70,45 +70,9 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-    {{!-- <div class="row justify-content-center mt-5">
-        <div class="col-md-4 img_col">
-            <img src="{{user.avatar}}" alt="Default user avatar">
-            <div>Followers: {{followers}} | Following: {{following}}</div>
-            <form class="mt-3" action="/user/edit" method="post" enctype="multipart/form-data">
-                <input type="file" name="avatar" id="avatar">
-                <button class="btn btn-danger btn-block mt-2" type="submit">Upload new avatar</button>
-            </form>
-        </div>
-        <div class="col-md-3">
-            <h2>{{user.username}}</h2>
-            <p>Role - {{user.role}}</p>
-            <p>Email - {{user.email}}</p>
-        </div>
-        <div class="col-md-3">
-            <h2>Users you follow</h2>
-            {{#each user.following}}
-            <a href="/user/profile/{{this.username}}"><p>{{this.username}}</p></a>
-            {{/each}}
-        </div>
-        <div class="col-md-2">
-            <a class="btn btn-primary btn-block" href="/user/messages">Check messages</a>
-        </div>
-    </div> --}}
     
     {{/if}}
 
-</div>
 
 <hr>
 
@@ -116,8 +80,8 @@
     <h2>Favourite movies</h2>
     <div class="row justify-content-center">
         {{#each favouriteMovies}}
-        <div class="col-md-2">
-                <div class="card">
+        <div class="col-md-4 d-flex align-items-strech justify-content-center">
+                <div class="card card_container">
                 <img class="card-img-top" src="https://image.tmdb.org/t/p/original{{poster_path}}" alt="Image of {{original_title}}">
                 <div class="card-body">
                     <h4 class="card-title">{{original_title}}</h4>
